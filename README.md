@@ -1,6 +1,6 @@
 # CI Status
 
-This README provides act-a-glance CI statuses across all of my currently maintained repositories.
+This README provides act-a-glance CI statuses across all of my actively maintained repositories.
 
 :warning: Don't look at the source code unless you want to throw up. Also, broken shields just mean the repository is inaccessible to you.
 
