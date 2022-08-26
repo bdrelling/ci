@@ -1,13 +1,17 @@
 # CI Status
 
-This README acts as quick-and-dirty CI status monitor across all of my currently maintained repositories.
+This README provides act-a-glance CI statuses across all of my currently maintained repositories.
+
+:warning: Don't look at the source code unless you want to throw up.
+
+:sleuth: Broken shields just mean the repository is private.
 
 ## Websites
 
 | Repository | Deployment | Tests | Swift | Platforms |
 | ---------- | ---------- | ----- | ----- | --------- |
-| [audiokit.io](https://github.com/AudioKit/audiokit.io) | | | [![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2FAudioKit%2Faudiokit.io%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/AudioKit/audiokit.io) |  [![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2FAudioKit%2Faudiokit.io%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/AudioKit/audiokit.io) |
-| [briandrelling.com](https://github.com/bdrelling/BrianDrelling-Vapor) | [![Deploy](https://github.com/bdrelling/BrianDrelling-Vapor/actions/workflows/deploy_container.yml/badge.svg)](https://github.com/bdrelling/BrianDrelling-Vapor/actions/workflows/deploy_container.yml) | | [![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fbdrelling%2FBrianDrelling-Vapor%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/bdrelling/BrianDrelling-Vapor) |  [![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fbdrelling%2FBrianDrelling-Vapor%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/bdrelling/BrianDrelling-Vapor) |
+| [audiokit.io](https://github.com/AudioKit/audiokit.io) | | | | |
+| [briandrelling.com](https://github.com/bdrelling/BrianDrelling-Vapor) | [![Deploy](https://github.com/bdrelling/BrianDrelling-Vapor/actions/workflows/deploy_container.yml/badge.svg)](https://github.com/bdrelling/BrianDrelling-Vapor/actions/workflows/deploy_container.yml) | | | |
 | [instruments.fyi](https://github.com/bdrelling/instruments.fyi) | [![](https://github.com/bdrelling/instruments.fyi/actions/workflows/deploy_container.yml/badge.svg)](https://github.com/bdrelling/instruments.fyi/actions/workflows/deploy_container.yml) | [![](https://github.com/bdrelling/instruments.fyi/actions/workflows/tests.yml/badge.svg)](https://github.com/bdrelling/instruments.fyi/actions/workflows/tests.yml) | [![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fbdrelling%2Finstruments.fyi%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/bdrelling/instruments.fyi) |  [![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fbdrelling%2Finstruments.fyi%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/bdrelling/instruments.fyi) |
 
 ## Libraries
