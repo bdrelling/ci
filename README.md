@@ -43,7 +43,7 @@ This README provides act-a-glance CI statuses across all of my actively maintain
 
 | Repository | Tests | Version |
 | ---------- | ----- | ------- |
-| [DocCMiddleware-Example](https://github.com/bdrelling/DocCMiddleware-Example) | [![](https://github.com/bdrelling/DocCMiddleware-Example/actions/workflows/tests.yml/badge.svg)](https://github.com/bdrelling/DocCMiddleware-Example/actions/workflows/tests.yml) | [![](https://img.shields.io/github/v/tag/bdrelling/DocCMiddleware-Example?color=blue&label=latest)](https://github.com/bdrelling/DocCMiddleware-Example/tags) |
+| [DocCMiddleware-Example](https://github.com/bdrelling/DocCMiddleware-Example) | [![](https://github.com/bdrelling/DocCMiddleware-Example/actions/workflows/build.yml/badge.svg)](https://github.com/bdrelling/DocCMiddleware-Example/actions/workflows/build.yml) | [![](https://img.shields.io/github/v/tag/bdrelling/DocCMiddleware-Example?color=blue&label=latest)](https://github.com/bdrelling/DocCMiddleware-Example/tags) |
 
 ### Templates
 
