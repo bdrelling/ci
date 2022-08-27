@@ -58,11 +58,40 @@ jobs:
           status: Failure
           color: 0xff0000
       # TODO: Troubleshooting
-  # troubleshooting:
-  #   runs-on: ubuntu-latest
-  #   needs: [swift_test_apple, swift_test_linux]
-  #   if: always()
-  #   steps:
-  #     - run: echo ${{ toJSON(needs) }}
-  #     - run: echo apple ${{ needs.swift_test_apple.result }}
-  #     - run: echo linux ${{ needs.swift_test_linux.result }}
+  troubleshooting:
+    runs-on: ubuntu-latest
+    needs: [swift_test_apple, swift_test_linux]
+    if: always()
+    steps:
+      # - name: machine echo github
+      #   env: { CONTENT: '${{ toJSON(github) }}' }
+      #   run: 'echo $CONTENT'
+      # - name: machine echo env
+      #   env: { CONTENT: '${{ toJSON(env) }}' }
+      #   run: 'echo $CONTENT'
+      # - name: machine echo job
+      #   env: { CONTENT: '${{ toJSON(job) }}' }
+      #   run: 'echo $CONTENT'
+      # - name: machine echo jobs
+      #   env: { CONTENT: '${{ toJSON(jobs) }}' }
+      #   run: 'echo $CONTENT'
+      # - name: machine echo steps
+      #   env: { CONTENT: '${{ toJSON(steps) }}' }
+      #   run: 'echo $CONTENT'
+      # - name: machine echo runner
+      #   env: { CONTENT: '${{ toJSON(runner) }}' }
+      #   run: 'echo $CONTENT'
+      # - name: machine echo secrets
+      #   env: { CONTENT: '${{ toJSON(secrets) }}' }
+      #   run: 'echo $CONTENT'
+      # - name: machine echo strategy
+      #   env: { CONTENT: '${{ toJSON(strategy) }}' }
+      #   run: 'echo $CONTENT'
+      # - name: machine echo matrix
+      #   env: { CONTENT: '${{ toJSON(matrix) }}' }
+      #   run: 'echo $CONTENT'
+      - name: machine echo needs
+        run: echo '${{ toJSON(needs) }}'
+      # - name: machine echo inputs
+      #   env: { CONTENT: '${{ toJSON(inputs) }}' }
+      #   run: 'echo $CONTENT'
