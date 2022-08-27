@@ -1,0 +1,67 @@
+name: Swift Test (Universal Package, 5.3+)
+
+# Tests a package for Swift 5.3+ (resource support) and greater on all Apple platforms and Linux.
+
+on:
+  workflow_call:
+    inputs:
+      scheme:
+        required: true
+        type: string
+      subcommand:
+        required: false
+        type: string
+        default: test
+    secrets:
+      DISCORD_CI_WEBHOOK:
+        required: true
+
+jobs:
+  prepare:
+    uses: ./.github/workflows/prepare.yml
+  swift_test_apple:
+    uses: ./.github/workflows/swift_test_apple.yml
+    needs: [prepare]
+    strategy:
+      fail-fast: false
+      matrix:
+        platform:
+          - { name: iOS, build_method: xcodebuild }
+          - { name: macOS, build_method: xcodebuild }
+          - { name: tvOS, build_method: xcodebuild }
+          - { name: watchOS, build_method: xcodebuild }
+          - { name: macOS, build_method: swift }
+        xcode_version:
+          - 12.4 # swift 5.3
+          - 12.5 # swift 5.4
+          - 13.2 # swift 5.5
+          - 13.4 # swift 5.6
+    with:
+      scheme: ${{ inputs.scheme }}
+      subcommand: ${{ inputs.subcommand }}
+      xcode_version: ${{ matrix.xcode_version }}
+      platform: ${{ matrix.platform.name }}
+      build_method: ${{ matrix.platform.build_method }}
+  swift_test_linux:
+    uses: ./.github/workflows/swift_test_linux.yml
+    needs: [prepare]
+    strategy:
+      fail-fast: false
+      matrix:
+        swift_version: [5.3, 5.4, 5.5, 5.6]
+    with:
+      scheme: ${{ inputs.scheme }}
+      subcommand: ${{ inputs.subcommand }}
+      swift_version: ${{ matrix.swift_version }}
+  send_notifications:
+    runs-on: ubuntu-latest
+    needs: [swift_test_apple, swift_test_linux]
+    if: failure()
+    steps:
+      - name: Send Discord Notification
+        uses: sarisia/actions-status-discord@v1
+        with:
+          webhook: ${{ secrets.DISCORD_CI_WEBHOOK }}
+          title: Tests Failed
+          status: Failure
+          color: 0xff0000
