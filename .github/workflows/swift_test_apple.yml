@@ -56,3 +56,5 @@ jobs:
         with:
           name: Output (${{ inputs.platform }}, Xcode ${{ inputs.xcode_version }})
           path: ${{ inputs.output_directory }}
+      # TODO: Troubleshooting
+      - run: echo job_status ${{ job.status }}
