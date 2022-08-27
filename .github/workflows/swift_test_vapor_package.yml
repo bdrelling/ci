@@ -72,9 +72,9 @@ jobs:
       # - name: machine echo job
       #   env: { CONTENT: '${{ toJSON(job) }}' }
       #   run: 'echo $CONTENT'
-      # - name: machine echo jobs
-      #   env: { CONTENT: '${{ toJSON(jobs) }}' }
-      #   run: 'echo $CONTENT'
+      - name: machine echo jobs
+        env: { CONTENT: '${{ toJSON(jobs) }}' }
+        run: 'echo $CONTENT'
       # - name: machine echo steps
       #   env: { CONTENT: '${{ toJSON(steps) }}' }
       #   run: 'echo $CONTENT'
