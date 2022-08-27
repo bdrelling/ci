@@ -27,6 +27,10 @@ on:
         required: false
         type: string
         default: test
+    outputs:
+      final:
+        description: 'The final output result'
+        value: ${{ jobs.swift_test.outputs.final }}
 
 env:
   LC_ALL: en_US.UTF-8
@@ -60,3 +64,37 @@ jobs:
       - run: echo job_status '${{ job.status }}'
     outputs:
       final: ${{ job.status }}
+  troubleshooting:
+    runs-on: ubuntu-latest
+    needs: [swift_test_apple, swift_test_linux]
+    if: always()
+    steps:
+      - name: machine echo github
+        env: { CONTENT: '${{ toJSON(github) }}' }
+        run: 'echo $CONTENT'
+      - name: machine echo env
+        env: { CONTENT: '${{ toJSON(env) }}' }
+        run: 'echo $CONTENT'
+      - name: machine echo job
+        env: { CONTENT: '${{ toJSON(job) }}' }
+        run: 'echo $CONTENT'
+      - name: machine echo steps
+        env: { CONTENT: '${{ toJSON(steps) }}' }
+        run: 'echo $CONTENT'
+      - name: machine echo runner
+        env: { CONTENT: '${{ toJSON(runner) }}' }
+        run: 'echo $CONTENT'
+      - name: machine echo secrets
+        env: { CONTENT: '${{ toJSON(secrets) }}' }
+        run: 'echo $CONTENT'
+      - name: machine echo strategy
+        env: { CONTENT: '${{ toJSON(strategy) }}' }
+        run: 'echo $CONTENT'
+      - name: machine echo matrix
+        env: { CONTENT: '${{ toJSON(matrix) }}' }
+        run: 'echo $CONTENT'
+      - name: machine echo needs
+        run: echo '${{ toJSON(needs) }}'
+      - name: machine echo inputs
+        env: { CONTENT: '${{ toJSON(inputs) }}' }
+        run: 'echo $CONTENT'
