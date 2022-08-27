@@ -144,22 +144,22 @@ xcodebuild_test() {
     # Add our destination to the xcodebuild command.
     # The devices used here support Xcode 12 and Xcode 13 explicitly.
     # To get valid destinations, run "xcodebuild -showdestinations -scheme <package_name>"
-    # TODO: If generic platforms work, get rid of the other entries!
+    # TODO: Investigate generic platform usage -- it works sometimes, not always
     case $platform in
     iOS)
-        command+=" -destination 'generic/platform=ios'"
-        # command+=" -destination 'platform=iOS Simulator,name=iPhone 12 Pro'"
+        # command+=" -destination 'generic/platform=ios'"
+        command+=" -destination 'platform=iOS Simulator,name=iPhone 12 Pro'"
         ;;
     macOS)
         command+=" -destination 'platform=macOS,arch=${arch}'"
         ;;
     tvOS)
-        command+=" -destination 'generic/platform=tvos'"
-        # command+=" -destination 'platform=tvOS Simulator,name=Apple TV'"
+        # command+=" -destination 'generic/platform=tvos'"
+        command+=" -destination 'platform=tvOS Simulator,name=Apple TV'"
         ;;
     watchOS)
-        command+=" -destination 'generic/platform=watchos'"
-        # command+=" -destination 'platform=watchOS Simulator,name=Apple Watch Series 6 - 44mm'"
+        # command+=" -destination 'generic/platform=watchos'"
+        command+=" -destination 'platform=watchOS Simulator,name=Apple Watch Series 6 - 44mm'"
         ;;
     Linux)
         echo "ERROR: Linux cannot run xcodebuild!"
