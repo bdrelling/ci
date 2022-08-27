@@ -47,10 +47,3 @@ jobs:
           title: Tests Failed
           status: Failure
           color: 0xff0000
-  troubleshooting:
-    runs-on: ubuntu-latest
-    needs: [swift_test_apple, swift_test_linux]
-    if: always()
-    steps:
-      - run: echo apple ${{ needs.swift_test_apple.result }}
-      - run: echo linux ${{ needs.swift_test_linux.result }}
