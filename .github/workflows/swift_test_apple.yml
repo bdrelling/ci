@@ -37,8 +37,6 @@ jobs:
     name: ${{ inputs.build_method }} test (${{ inputs.platform }}, Xcode ${{ inputs.xcode_version }})
     # Available Runners: https://github.com/actions/virtual-environments
     runs-on: ${{ startsWith(inputs.xcode_version, '12') && 'macos-11' || 'macos-12' }}
-    # TODO: Figure out how to get this to continue, but pass the failed state properly to the Discord notifications.
-    # continue-on-error: true
     steps:
       - name: Checkout
         uses: actions/checkout@v2

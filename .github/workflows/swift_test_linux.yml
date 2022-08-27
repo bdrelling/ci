@@ -29,8 +29,6 @@ jobs:
     runs-on: ubuntu-latest
     # Available Docker Images: https://hub.docker.com/_/swift/
     container: swift:${{ inputs.swift_version }}-focal
-    # TODO: Figure out how to get this to continue, but pass the failed state properly to the Discord notifications.
-    # continue-on-error: true
     steps:
       - name: Checkout
         uses: actions/checkout@v2
