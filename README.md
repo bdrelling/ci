@@ -1,12 +1,18 @@
-# CI Status
+# CI
 
-This README provides act-a-glance CI statuses across all of my actively maintained repositories.
+This is a collection of my personal CI scripts, workflows, and statuses.
+
+I don't recommend you link to or depend upon any scripts or workflows in this repository directly, but you should feel free to copy anything that might help you in your own projects.
+
+## Monitor
+
+This "monitor" provides act-a-glance CI statuses across all of my actively maintained repositories.
 
 :warning: Don't look at the source code unless you want to throw up. Also, broken shields just mean the repository is inaccessible to you.
 
 > All GitHub Actions statuses are linked to the `main` branch.
 
-## Websites
+### Websites
 
 | Repository | Tests | Deployment | Swift | Platforms |
 | ---------- | ----- | ---------- | ----- | --------- |
@@ -14,9 +20,9 @@ This README provides act-a-glance CI statuses across all of my actively maintain
 | [briandrelling.com](https://github.com/bdrelling/BrianDrelling-Vapor) | [![](https://github.com/bdrelling/BrianDrelling-Vapor/actions/workflows/tests.yml/badge.svg)](https://github.com/bdrelling/BrianDrelling-Vapor/actions/workflows/tests.yml) | [![](https://github.com/bdrelling/BrianDrelling-Vapor/actions/workflows/deploy_container.yml/badge.svg)](https://github.com/bdrelling/BrianDrelling-Vapor/actions/workflows/deploy_container.yml) | | |
 | [instruments.fyi](https://github.com/bdrelling/instruments.fyi) | [![](https://github.com/bdrelling/instruments.fyi/actions/workflows/tests.yml/badge.svg)](https://github.com/bdrelling/instruments.fyi/actions/workflows/tests.yml) | [![](https://github.com/bdrelling/instruments.fyi/actions/workflows/deploy_container.yml/badge.svg)](https://github.com/bdrelling/instruments.fyi/actions/workflows/deploy_container.yml) | [![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fbdrelling%2Finstruments.fyi%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/bdrelling/instruments.fyi) |  [![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fbdrelling%2Finstruments.fyi%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/bdrelling/instruments.fyi) |
 
-## Libraries
+### Libraries
 
-### [bdrelling](https://github.com/bdrelling)
+#### [bdrelling](https://github.com/bdrelling)
 
 | Repository | Tests | Version | Swift | Platforms |
 | ---------- | ----- | ------- | ----- | --------- |
@@ -26,7 +32,7 @@ This README provides act-a-glance CI statuses across all of my actively maintain
 | [PlotVapor](https://github.com/bdrelling/PlotVapor) | [![](https://github.com/bdrelling/PlotVapor/actions/workflows/tests.yml/badge.svg)](https://github.com/bdrelling/PlotVapor/actions/workflows/tests.yml) | [![](https://img.shields.io/github/v/tag/bdrelling/PlotVapor?color=blue&label=latest)](https://github.com/bdrelling/PlotVapor/tags) | [![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fbdrelling%2FPlotVapor%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/bdrelling/PlotVapor) |  [![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fbdrelling%2FPlotVapor%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/bdrelling/PlotVapor) |
 | [VaporExtensions](https://github.com/bdrelling/VaporExtensions) | [![](https://github.com/bdrelling/VaporExtensions/actions/workflows/tests.yml/badge.svg)](https://github.com/bdrelling/VaporExtensions/actions/workflows/tests.yml) | [![](https://img.shields.io/github/v/tag/bdrelling/VaporExtensions?color=blue&label=latest)](https://github.com/bdrelling/VaporExtensions/tags) | [![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fbdrelling%2FVaporExtensions%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/bdrelling/VaporExtensions) |  [![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fbdrelling%2FVaporExtensions%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/bdrelling/VaporExtensions) |
 
-### [Kipple](https://github.com/swift-kipple)
+#### [Kipple](https://github.com/swift-kipple)
 
 | Repository | Tests | Version | Swift | Platforms |
 | ---------- | ----- | ------- | ----- | --------- |
@@ -37,15 +43,15 @@ This README provides act-a-glance CI statuses across all of my actively maintain
 | [KippleTools](https://github.com/swift-kipple/Tools) | [![](https://github.com/swift-kipple/Tools/actions/workflows/tests.yml/badge.svg)](https://github.com/swift-kipple/Tools/actions/workflows/tests.yml) | [![](https://img.shields.io/github/v/tag/swift-kipple/Tools?color=blue&label=latest)](https://github.com/swift-kipple/Tools/tags) | [![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fswift-kipple%2FTools%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/swift-kipple/Tools) |  [![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fswift-kipple%2FTools%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/swift-kipple/Tools) |
 | [KippleUI](https://github.com/swift-kipple/UI) | [![](https://github.com/swift-kipple/UI/actions/workflows/tests.yml/badge.svg)](https://github.com/swift-kipple/UI/actions/workflows/tests.yml) | [![](https://img.shields.io/github/v/tag/swift-kipple/UI?color=blue&label=latest)](https://github.com/swift-kipple/UI/tags) | [![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fswift-kipple%2FUI%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/swift-kipple/UI) |  [![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fswift-kipple%2FUI%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/swift-kipple/UI) |
 
-## Other
+### Other
 
-### Examples
+#### Examples
 
 | Repository | Tests | Version |
 | ---------- | ----- | ------- |
 | [DocCMiddleware-Example](https://github.com/bdrelling/DocCMiddleware-Example) | [![](https://github.com/bdrelling/DocCMiddleware-Example/actions/workflows/tests.yml/badge.svg)](https://github.com/bdrelling/DocCMiddleware-Example/actions/workflows/tests.yml) | [![](https://img.shields.io/github/v/tag/bdrelling/DocCMiddleware-Example?color=blue&label=latest)](https://github.com/bdrelling/DocCMiddleware-Example/tags) |
 
-### Templates
+#### Templates
 
 | Repository | Tests | Version |
 | ---------- | ----- | ------- |
