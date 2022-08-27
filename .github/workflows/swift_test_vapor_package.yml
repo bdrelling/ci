@@ -63,5 +63,6 @@ jobs:
     needs: [swift_test_apple, swift_test_linux]
     if: always()
     steps:
+      - run: echo ${{ toJSON(needs) }}
       - run: echo apple ${{ needs.swift_test_apple.result }}
       - run: echo linux ${{ needs.swift_test_linux.result }}
