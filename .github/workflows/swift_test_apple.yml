@@ -66,7 +66,7 @@ jobs:
       final: ${{ job.status }}
   troubleshooting:
     runs-on: ubuntu-latest
-    needs: [swift_test_apple, swift_test_linux]
+    needs: [swift_test]
     if: always()
     steps:
       - name: machine echo github
