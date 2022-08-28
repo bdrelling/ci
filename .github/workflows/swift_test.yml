@@ -24,28 +24,28 @@ jobs:
     uses: bdrelling/ci/.github/workflows/prepare.yml@main
   # TODO: Add a job here that builds the matrix for the next step, based on minimum_swift_version and platforms
   # Example: https://michaelheap.com/dynamic-matrix-generation-github-actions/
-  test-matrix:
+  create-swift-test-matrix:
     runs-on: ubuntu-latest
     needs: [prepare]
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - id: test-matrix
-        uses: ./.github/actions/swift-prepare
+      - id: create-swift-test-matrix
+        uses: ./.github/actions/create-swift-test-matrix
         with:
           platforms: ${{ inputs.platforms }}
           swift-versions: ${{ inputs.swift-versions }}
           debug: true
     outputs:
-      test-matrix: ${{ steps.test-matrix.outputs.test-matrix }}
+      test-matrix: ${{ steps.create-swift-test-matrix.outputs.test-matrix }}
   swift_test:
     name: ${{ matrix.inputs.build-method }} ${{ inputs.subcommand }} (${{ matrix.inputs.platform }}, swift ${{ matrix.inputs.swift-version }})
     runs-on: ${{ matrix.inputs.runner }}
-    needs: [test-matrix]
+    needs: [create-swift-test-matrix]
     strategy:
       fail-fast: false
       matrix:
-        inputs: ${{ fromJSON(needs.test-matrix.outputs.test-matrix) }}
+        inputs: ${{ fromJSON(needs.create-swift-test-matrix.outputs.test-matrix) }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
