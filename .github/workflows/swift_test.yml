@@ -29,7 +29,7 @@ jobs:
     needs: [prepare]
     steps:
       - id: create-swift-test-matrix
-        uses: bdrelling/ci/.github/actions/create-swift-test-matrix
+        uses: bdrelling/ci/.github/actions/create-swift-test-matrix@main
         with:
           platforms: ${{ inputs.platforms }}
           swift-versions: ${{ inputs.swift-versions }}
@@ -47,7 +47,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - uses: bdrelling/ci/.github/actions/swift-test
+      - uses: bdrelling/ci/.github/actions/swift-test@main
         with:
           scheme: ${{ inputs.scheme }}
           platform: ${{ matrix.inputs.platform }}
