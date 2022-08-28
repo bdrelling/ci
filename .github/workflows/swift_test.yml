@@ -28,10 +28,8 @@ jobs:
     runs-on: ubuntu-latest
     needs: [prepare]
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
       - id: create-swift-test-matrix
-        uses: ./.github/actions/create-swift-test-matrix
+        uses: bdrelling/ci/.github/actions/create-swift-test-matrix
         with:
           platforms: ${{ inputs.platforms }}
           swift-versions: ${{ inputs.swift-versions }}
@@ -49,7 +47,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - uses: ./.github/actions/swift-test
+      - uses: bdrelling/ci/.github/actions/swift-test
         with:
           scheme: ${{ inputs.scheme }}
           platform: ${{ matrix.inputs.platform }}
