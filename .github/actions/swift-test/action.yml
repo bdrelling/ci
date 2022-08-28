@@ -1,0 +1,88 @@
+name: 'Swift Test'
+author: 'Brian Drelling'
+description: 'Runs swift/xcodebuild test/build for a given platform and Swift version.'
+branding:
+  icon: 'terminal'
+  color: 'purple'
+inputs:
+  debug:
+    description: 'Whether or not to utilize debugging step. Defaults to false.'
+    required: false
+    default: 'false'
+  # TODO: Make this auto-capture within scripts.
+  scheme:
+    description: 'The scheme within the package to build.'
+    required: true
+  # TODO: Make this auto-capture within scripts?
+  platform:
+    description: 'The platform to run tests on. Valid options are: iOS, macOS, tvOS, watchOS, Linux'
+    required: false
+    default: macOS
+  # TODO: Make this auto-capture within scripts?
+  swift-version:
+    description: 'The version of Swift to use. Valid options are 5.3+. Does not support minor/patch versioning.'
+    required: false
+    default: '5.6'
+  # TODO: Make this auto-capture within scripts?
+  build-method:
+    description: 'The build method to use. Valid options are: swift, xcodebuild'
+    required: false
+    default: swift
+  output:
+    description: 'The output directory for build and test output.'
+    required: false
+  # TODO: Make this auto-capture within scripts?
+  subcommand:
+    description: 'The subcommand to use. Valid options are: build, test'
+    required: false
+    default: test
+runs:
+  using: 'composite'
+  steps:
+    - name: Validate Platform and Operating System
+      if: ${{ (inputs.platform == 'Linux' && runner.os != 'Linux') || (inputs.platform != 'Linux' && runner.os == 'Linux') }}
+      run: exit 1
+      shell: sh
+
+    - name: Get Xcode Version
+      id: get-xcode-version
+      if: ${{ runner.os == 'macOS' }}
+      run: scripts/get_xcode_version.sh ${{ inputs.swift-version }}
+      shell: sh
+      working-directory: ${{ github.action_path }}
+
+    # Print the version of Swift we're using.
+    - name: Xcode Version Check
+      if: ${{ runner.os == 'macOS' }}
+      run: echo '${{ steps.get-xcode-version.outputs.xcode-version }}'
+      shell: sh
+
+    - name: Setup Xcode
+      if: ${{ runner.os == 'macOS' }}
+      uses: maxim-lobanov/setup-xcode@v1
+      with:
+        xcode-version: ${{ steps.get-xcode-version.outputs.xcode-version }}
+
+    # TODO: Verify that this doesn't add time if the container has the right version! If it does, we need another check.
+    - name: Setup Swift
+      if: ${{ runner.os == 'Linux' }}
+      uses: swift-actions/setup-swift@v1
+      with:
+        swift-version: ${{ inputs.swift-version }}
+
+    # Print the version of Swift we're using.
+    - name: Swift Version Check
+      if: ${{ inputs.debug == 'true' }}
+      run: swift --version
+      shell: sh
+
+    - name: Run Tests
+      run: ${GITHUB_ACTION_PATH}/scripts/swift_test.sh --scheme ${{ inputs.scheme }} --method ${{ inputs.build-method }} --platform ${{ inputs.platform }} --subcommand ${{ inputs.subcommand }} --output ${{ inputs.output }}
+      shell: bash
+
+    - name: Upload Step Output
+      uses: actions/upload-artifact@v1
+      if: ${{ inputs.output }}
+      with:
+        name: Output (${{ inputs.platform }}, Xcode ${{ inputs.xcode-version }})
+        path: ${{ inputs.output }}

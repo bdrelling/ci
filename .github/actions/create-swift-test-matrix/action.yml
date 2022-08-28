@@ -1,0 +1,33 @@
+name: 'Create Swift Test Matrix'
+author: 'Brian Drelling'
+description: 'Creates a test matrix compatible with the swift-test action.'
+branding:
+  icon: 'terminal'
+  color: 'purple'
+inputs:
+  debug:
+    description: 'Whether or not to print debugging information.'
+    required: false
+    default: 'false'
+  platforms:
+    description: 'A space-delimited list of Swift-compatible platforms to test on.'
+    required: false
+    default: 'macOS'
+  swift-versions:
+    description: 'A space-delimited list of Swift versions to use for compilation. Only supports MAJOR.MINOR syntax (eg. 5.5, not 5.5.1).'
+    required: false
+    default: '5.6'
+outputs:
+  test-matrix:
+    description: 'A test matrix compatible with the Swift Test workflow.'
+    value: ${{ steps.get-test-matrix.outputs.test-matrix }}
+runs:
+  using: 'composite'
+  steps:
+    - name: Get Test Matrix
+      id: get-test-matrix
+      env:
+        DEBUG_SWIFT_TEST_MATRIX: ${{ inputs.debug }}
+      run: scripts/get_test_matrix.sh '${{ inputs.platforms }}' '${{ inputs.swift-versions }}'
+      shell: bash
+      working-directory: ${{ github.action_path }}
