@@ -45,13 +45,14 @@ jobs:
         with:
           platforms: ${{ inputs.platforms }}
           swift-versions: ${{ inputs.swift-versions }}
+          subcommand: ${{ inputs.subcommand }}
           debug: true
     outputs:
       test-matrix: ${{ steps.create-swift-test-matrix.outputs.test-matrix }}
 
   # Run our test script.
   swift_test:
-    name: ${{ matrix.inputs.build-method }} ${{ inputs.subcommand }} (${{ matrix.inputs.platform }}, swift ${{ matrix.inputs.swift-version }})
+    name: ${{ matrix.inputs.build-method }} ${{ matrix.inputs.subcommand }} (${{ matrix.inputs.platform }}, swift ${{ matrix.inputs.swift-version }})
     runs-on: ${{ matrix.inputs.runner }}
     needs: [create-swift-test-matrix]
     strategy:
@@ -68,7 +69,7 @@ jobs:
           scheme: ${{ inputs.scheme }}
           platform: ${{ matrix.inputs.platform }}
           build-method: ${{ matrix.inputs.build-method }}
-          subcommand: ${{ inputs.subcommand }}
+          subcommand: ${{ matrix.inputs.subcommand }}
           swift-version: ${{ matrix.inputs.swift-version }}
 
   # Send notifications to Discord on failure.

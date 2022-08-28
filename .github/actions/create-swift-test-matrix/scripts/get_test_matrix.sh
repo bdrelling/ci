@@ -6,6 +6,7 @@ set -e
 debug=${DEBUG_SWIFT_TEST_MATRIX-'false'}
 platforms=${1-'macOS'}
 swift_versions=${2-'5.6'}
+sbucommand=${3-'test'}
 
 # Define our constants.
 delimeter=" "
@@ -63,14 +64,19 @@ for platform in "${platforms_array[@]}"; do
     for swift_version in "${swift_versions_array[@]}"; do
         runner=$(get_runner $platform $swift_version)
 
-        if [[ $platform == 'ios' || $platform == 'macos' || $platform == 'tvos' || $platform == 'watchos' ]]; then
-            output="{ 'runner': '${runner}', 'platform': '${platform}', 'build-method': 'xcodebuild', 'swift-version': '${swift_version}' },"
+        if [[ $subcommand == 'test' && $platform == 'watchos' && $swift_version == '5.3' ]]; then
+            # XCTest is not compatible with watchOS when compiling for Swift 5.3.
+            output="{ 'runner': '${runner}', 'platform': '${platform}', 'build-method': 'xcodebuild', 'subcommand': 'build', 'swift-version': '${swift_version}' },"
+            if [ $debug == 'true' ]; then echo "    $output"; fi
+            test_matrix+="$output"
+        elif [[ $platform == 'ios' || $platform == 'macos' || $platform == 'tvos' || $platform == 'watchos' ]]; then
+            output="{ 'runner': '${runner}', 'platform': '${platform}', 'build-method': 'xcodebuild', 'subcommand': '${subcommand}', 'swift-version': '${swift_version}' },"
             if [ $debug == 'true' ]; then echo "    $output"; fi
             test_matrix+="$output"
         fi
 
         if [[ $platform == 'macos' || $platform == 'linux' ]]; then
-            output="{ 'runner': '${runner}', 'platform': '${platform}', 'build-method': 'swift', 'swift-version': '${swift_version}' },"
+            output="{ 'runner': '${runner}', 'platform': '${platform}', 'build-method': 'swift', 'subcommand': '${subcommand}', 'swift-version': '${swift_version}' },"
             if [ $debug == 'true' ]; then echo "    $output"; fi
             test_matrix+="$output"
         fi
