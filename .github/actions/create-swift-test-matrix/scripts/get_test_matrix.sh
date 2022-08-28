@@ -66,9 +66,8 @@ for platform in "${platforms_array[@]}"; do
 
         if [[ $subcommand == 'test' && $platform == 'watchos' && $swift_version == '5.3' ]]; then
             # XCTest is not compatible with watchOS when compiling for Swift 5.3.
-            output="{ 'runner': '${runner}', 'platform': '${platform}', 'build-method': 'xcodebuild', 'subcommand': 'build', 'swift-version': '${swift_version}' },"
-            if [ $debug == 'true' ]; then echo "    $output"; fi
-            test_matrix+="$output"
+            # Therefore, we have to skip testing *and* building this package with xcodebuild.
+            continue
         elif [[ $platform == 'ios' || $platform == 'macos' || $platform == 'tvos' || $platform == 'watchos' ]]; then
             output="{ 'runner': '${runner}', 'platform': '${platform}', 'build-method': 'xcodebuild', 'subcommand': '${subcommand}', 'swift-version': '${swift_version}' },"
             if [ $debug == 'true' ]; then echo "    $output"; fi
