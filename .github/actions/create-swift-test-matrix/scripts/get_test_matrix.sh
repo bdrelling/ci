@@ -6,7 +6,7 @@ set -e
 debug=${DEBUG_SWIFT_TEST_MATRIX-'false'}
 platforms=${1-'macOS'}
 swift_versions=${2-'5.6'}
-sbucommand=${3-'test'}
+subcommand=${3-'test'}
 
 # Define our constants.
 delimeter=" "
