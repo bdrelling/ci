@@ -4,38 +4,47 @@ on:
   workflow_call:
     inputs:
       scheme:
+        description: 'The scheme within our package to test or build.'
         required: true
         type: string
       subcommand:
+        description: 'The subcommand to use. (eg. xcodebuild <subcommand>) Valid options are: test, build'
         required: false
         type: string
         default: test
       platforms:
+        description: 'A space-delimited list of platforms to test. Valid options are: iOS, macOS, tvOS, watchOS, Linux'
         required: false
         type: string
         default: macOS
       swift-versions:
+        description: 'A space-delimited list of Swift version to test. Does not support patch versions (eg. 5.4.1).  Valid options are: 5.3 or greater'
         required: false
         type: string
         default: '5.6'
 
 jobs:
+  # Prepare our workflow.
   prepare:
     uses: ./.github/workflows/prepare.yml
-  # TODO: Add a job here that builds the matrix for the next step, based on minimum_swift_version and platforms
-  # Example: https://michaelheap.com/dynamic-matrix-generation-github-actions/
+
+  # Generate a dynamic matrix to use for testing.
   create-swift-test-matrix:
     runs-on: ubuntu-latest
     needs: [prepare]
     steps:
-      - id: create-swift-test-matrix
-        uses: ./.github/actions/create-swift-test-matrix
+      - name: Create Swift Test Matrix
+        id: create-swift-test-matrix
+        # As of September 2022, we cannot reference local actions from a reusable workflow.
+        uses: bdrelling/ci/.github/actions/create-swift-test-matrix@main
         with:
           platforms: ${{ inputs.platforms }}
           swift-versions: ${{ inputs.swift-versions }}
           debug: true
     outputs:
       test-matrix: ${{ steps.create-swift-test-matrix.outputs.test-matrix }}
+
+  # Run our test script.
   swift_test:
     name: ${{ matrix.inputs.build-method }} ${{ inputs.subcommand }} (${{ matrix.inputs.platform }}, swift ${{ matrix.inputs.swift-version }})
     runs-on: ${{ matrix.inputs.runner }}
@@ -47,13 +56,17 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - uses: ./.github/actions/swift-test
+      - name: Run Tests
+        # As of September 2022, we cannot reference local actions from a reusable workflow.
+        uses: bdrelling/ci/.github/actions/swift-test@main
         with:
           scheme: ${{ inputs.scheme }}
           platform: ${{ matrix.inputs.platform }}
           build-method: ${{ matrix.inputs.build-method }}
           subcommand: ${{ inputs.subcommand }}
           swift-version: ${{ matrix.inputs.swift-version }}
+
+  # Send notifications to Discord on failure.
   send_notifications:
     runs-on: ubuntu-latest
     needs: [swift_test]
