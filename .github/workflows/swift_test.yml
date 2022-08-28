@@ -21,7 +21,7 @@ on:
 
 jobs:
   prepare:
-    uses: ./.github/workflows/prepare.yml@main
+    uses: ./.github/workflows/prepare.yml
   # TODO: Add a job here that builds the matrix for the next step, based on minimum_swift_version and platforms
   # Example: https://michaelheap.com/dynamic-matrix-generation-github-actions/
   create-swift-test-matrix:
@@ -29,7 +29,7 @@ jobs:
     needs: [prepare]
     steps:
       - id: create-swift-test-matrix
-        uses: ./.github/actions/create-swift-test-matrix@main
+        uses: ./.github/actions/create-swift-test-matrix
         with:
           platforms: ${{ inputs.platforms }}
           swift-versions: ${{ inputs.swift-versions }}
@@ -47,7 +47,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - uses: ./.github/actions/swift-test@main
+      - uses: ./.github/actions/swift-test
         with:
           scheme: ${{ inputs.scheme }}
           platform: ${{ matrix.inputs.platform }}
