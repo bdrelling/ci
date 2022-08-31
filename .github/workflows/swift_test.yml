@@ -74,6 +74,7 @@ jobs:
 
   # Send notifications to Discord on failure.
   send_notifications:
+    name: Send Notifications
     runs-on: ubuntu-latest
     needs: [swift_test]
     if: failure()
