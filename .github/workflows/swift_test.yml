@@ -77,3 +77,4 @@ jobs:
     name: Send Notification
     uses: ./.github/workflows/send_notification.yml
     needs: [swift_test]
+    secrets: inherit
