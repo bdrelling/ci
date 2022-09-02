@@ -5,6 +5,7 @@ on:
 
 jobs:
   prepare:
+    name: Prepare
     runs-on: ubuntu-latest
     steps:
       - name: Cancel Previous Runs
