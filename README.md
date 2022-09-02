@@ -1,8 +1,8 @@
 # CI
 
-This is a collection of my personal CI scripts, workflows, and statuses.
+This repository serves as a collection of my personal CI scripts, workflows, and actions.
 
-I don't recommend you link to or depend upon any scripts or workflows in this repository directly, but you should feel free to copy anything that might help you in your own projects.
+I don't recommend you link to or depend upon any scripts or workflows in this repository directly, but please feel free to copy anything that might help you in your own projects.
 
 ## Monitor
 
