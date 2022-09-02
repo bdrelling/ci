@@ -10,7 +10,6 @@ jobs:
   send_notification:
     name: Send Notification
     runs-on: ubuntu-latest
-    if: failure()
     steps:
       - name: Send Discord Notification
         uses: sarisia/actions-status-discord@v1

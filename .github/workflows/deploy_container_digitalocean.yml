@@ -63,3 +63,5 @@ jobs:
     name: Send Notification
     uses: ./.github/workflows/send_notification.yml
     needs: [deploy]
+    if: failure()
+    secrets: inherit
