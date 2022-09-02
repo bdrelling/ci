@@ -2,6 +2,12 @@ name: Send Notification
 
 on:
   workflow_call:
+    inputs:
+      title:
+        description: The title of the Discord message.
+        required: false
+        type: string
+        default: Tests Failed
     secrets:
       DISCORD_CI_WEBHOOK:
         required: true
@@ -15,6 +21,6 @@ jobs:
         uses: sarisia/actions-status-discord@v1
         with:
           webhook: ${{ secrets.DISCORD_CI_WEBHOOK }}
-          title: Tests Failed
+          title: ${{ inputs.title }}
           status: Failure
           color: 0xff0000
