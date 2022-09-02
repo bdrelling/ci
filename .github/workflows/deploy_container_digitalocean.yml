@@ -58,17 +58,8 @@ jobs:
       - name: Deploy App
         run: doctl apps create-deployment ${{ secrets.DIGITALOCEAN_APP_ID }}
 
-  # Send notifications to Discord on failure.
-  send_notifications:
-    name: Send Notifications
-    runs-on: ubuntu-latest
+  # Send notification to Discord on failure.
+  send_notification:
+    name: Send Notification
+    uses: ./.github/workflows/send_notification.yml
     needs: [deploy]
-    if: failure()
-    steps:
-      - name: Send Discord Notification
-        uses: sarisia/actions-status-discord@v1
-        with:
-          webhook: ${{ secrets.DISCORD_CI_WEBHOOK }}
-          title: Tests Failed
-          status: Failure
-          color: 0xff0000
