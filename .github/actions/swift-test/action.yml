@@ -53,7 +53,7 @@ runs:
 
     # Print the version of Swift we're using.
     - name: Xcode Version Check
-      if: ${{ runner.os == 'macOS' }}
+      if: ${{ runner.os == 'macOS' && inputs.debug == 'true' }}
       run: echo '${{ steps.get-xcode-version.outputs.xcode-version }}'
       shell: sh
 

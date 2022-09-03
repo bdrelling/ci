@@ -75,10 +75,10 @@ swift_test() {
     # Define our command.
     case $subcommand in
     build)
-        command='swift build -c debug'
+        command='swift build --configuration debug'
         ;;
     test)
-        command='swift test -c debug'
+        command='swift test --configuration debug'
         ;;
     *)
         echo "ERROR: Invalid subcommand '${subcommand}'. Valid options are: build, test"
