@@ -1,0 +1,47 @@
+name: Deploy to DigitalOcean
+
+on:
+  workflow_call:
+    inputs:
+      registry_name:
+        required: true
+        type: string
+      image_name:
+        required: true
+        type: string
+    secrets:
+      DIGITALOCEAN_ACCESS_TOKEN:
+        required: true
+      DIGITALOCEAN_APP_ID:
+        required: true
+      DISCORD_CI_WEBHOOK:
+        required: true
+
+jobs:
+  prepare:
+    name: Prepare
+    uses: bdrelling/ci/.github/workflows/prepare.yml@main
+
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    needs: [prepare]
+    steps:
+      - name: Build and Push Container
+        uses: bdrelling/ci/.github/actions/build-and-push-container@main
+        with:
+          registry: registry.digitalocean.com
+          registry_name: ${{ inputs.registry_name }}
+          registry_username: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+          registry_password: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+          image_name: ${{ inputs.image_name }}
+      - name: Deploy App
+        run: doctl apps create-deployment ${{ secrets.DIGITALOCEAN_APP_ID }}
+
+  # Send notification to Discord on failure.
+  send_notification:
+    name: Send Notification
+    uses: bdrelling/ci/.github/workflows/send_notification.yml@main
+    needs: [deploy]
+    if: failure()
+    secrets: inherit
