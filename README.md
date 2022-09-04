@@ -8,7 +8,7 @@ I don't recommend you link to or depend upon any scripts or workflows in this re
 
 This "monitor" provides act-a-glance CI statuses across all of my actively maintained repositories.
 
-:warning: Don't look at the source code unless you want to throw up. Also, broken shields just mean the repository is inaccessible to you.
+:warning: Don't look at the source code unless you want to throw up. Also, missing or broken images may just mean the repository is inaccessible to you.
 
 > All GitHub Actions statuses are linked to the `main` branch.
 
@@ -16,9 +16,9 @@ This "monitor" provides act-a-glance CI statuses across all of my actively maint
 
 | Repository | Tests | Deployment | Swift | Platforms |
 | ---------- | ----- | ---------- | ----- | --------- |
-| [audiokit.io](https://github.com/AudioKit/audiokit.io) | | | | |
-| [briandrelling.com](https://github.com/bdrelling/BrianDrelling-Vapor) | [![](https://github.com/bdrelling/BrianDrelling-Vapor/actions/workflows/tests.yml/badge.svg)](https://github.com/bdrelling/BrianDrelling-Vapor/actions/workflows/tests.yml) | [![](https://github.com/bdrelling/BrianDrelling-Vapor/actions/workflows/deploy_container.yml/badge.svg)](https://github.com/bdrelling/BrianDrelling-Vapor/actions/workflows/deploy_container.yml) | | |
-| [instruments.fyi](https://github.com/bdrelling/instruments.fyi) | [![](https://github.com/bdrelling/instruments.fyi/actions/workflows/tests.yml/badge.svg)](https://github.com/bdrelling/instruments.fyi/actions/workflows/tests.yml) | [![](https://github.com/bdrelling/instruments.fyi/actions/workflows/deploy_container.yml/badge.svg)](https://github.com/bdrelling/instruments.fyi/actions/workflows/deploy_container.yml) | [![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fbdrelling%2Finstruments.fyi%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/bdrelling/instruments.fyi) |  [![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fbdrelling%2Finstruments.fyi%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/bdrelling/instruments.fyi) |
+| [audiokit.io](https://github.com/AudioKit/audiokit.io) | [![](https://github.com/AudioKit/audiokit.io/actions/workflows/tests.yml/badge.svg)](https://github.com/AudioKit/audiokit.io/actions/workflows/tests.yml) | | | |
+| [briandrelling.com](https://github.com/bdrelling/briandrelling.com) | [![](https://github.com/bdrelling/briandrelling.com/actions/workflows/tests.yml/badge.svg)](https://github.com/bdrelling/briandrelling.com/actions/workflows/tests.yml) | [![](https://github.com/bdrelling/briandrelling.com/actions/workflows/deploy_app.yml/badge.svg)](https://github.com/bdrelling/briandrelling.com/actions/workflows/deploy_app.yml) | | |
+| [instruments.fyi](https://github.com/bdrelling/instruments.fyi) | [![](https://github.com/bdrelling/instruments.fyi/actions/workflows/tests.yml/badge.svg)](https://github.com/bdrelling/instruments.fyi/actions/workflows/tests.yml) | [![](https://github.com/bdrelling/instruments.fyi/actions/workflows/deploy_app.yml/badge.svg)](https://github.com/bdrelling/instruments.fyi/actions/workflows/deploy_app.yml) | [![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fbdrelling%2Finstruments.fyi%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/bdrelling/instruments.fyi) |  [![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fbdrelling%2Finstruments.fyi%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/bdrelling/instruments.fyi) |
 
 ### Libraries
 
