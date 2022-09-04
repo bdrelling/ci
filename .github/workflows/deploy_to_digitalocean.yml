@@ -22,8 +22,9 @@ jobs:
     name: Prepare
     uses: bdrelling/ci/.github/workflows/prepare.yml@main
 
-  deploy:
-    name: Deploy
+  # Build the image and push to the container registry.
+  deploy_container:
+    name: Deploy Container
     runs-on: ubuntu-latest
     needs: [prepare]
     steps:
@@ -35,13 +36,26 @@ jobs:
           registry_username: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
           registry_password: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
           image_name: ${{ inputs.image_name }}
-      - name: Deploy App
-        run: doctl apps create-deployment ${{ secrets.DIGITALOCEAN_APP_ID }}
+
+  # Trigger the app deployment.
+  deploy_app:
+    name: Deploy App
+    runs-on: ubuntu-latest
+    needs: [deploy_container]
+    steps:
+      - name: Install doctl
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+      - name: Create Deployment
+        run: |
+          doctl registry login --expiry-seconds 60
+          doctl apps create-deployment ${{ secrets.DIGITALOCEAN_APP_ID }}
 
   # Send notification to Discord on failure.
   send_notification:
     name: Send Notification
     uses: bdrelling/ci/.github/workflows/send_notification.yml@main
-    needs: [deploy]
+    needs: [deploy_app]
     if: failure()
     secrets: inherit
