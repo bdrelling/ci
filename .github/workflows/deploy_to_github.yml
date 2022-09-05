@@ -11,10 +11,12 @@ on:
         required: true
 
 jobs:
+  # Prepare our workflow.
   prepare:
     name: Prepare
-    uses: bdrelling/ci/.github/workflows/prepare.yml@main
+    uses: ./.github/workflows/prepare.yml
 
+  # Build the image and push to the container registry.
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
@@ -32,7 +34,7 @@ jobs:
   # Send notification to Discord on failure.
   send_notification:
     name: Send Notification
-    uses: bdrelling/ci/.github/workflows/send_notification.yml@main
+    uses: ./.github/workflows/send_notification.yml
     needs: [deploy]
     if: failure()
     secrets: inherit
