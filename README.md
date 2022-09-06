@@ -47,9 +47,9 @@ This "monitor" provides act-a-glance CI statuses across all of my actively maint
 
 #### Examples
 
-| Repository | Tests | Version |
-| ---------- | ----- | ------- |
-| [DocCMiddleware-Example](https://github.com/bdrelling/DocCMiddleware-Example) | [![](https://img.shields.io/github/workflow/status/bdrelling/DocCMiddleware-Example/Tests?label=)](https://github.com/bdrelling/DocCMiddleware-Example/actions/workflows/tests.yml) | [![](https://img.shields.io/github/v/tag/bdrelling/DocCMiddleware-Example?color=blue&label=)](https://github.com/bdrelling/DocCMiddleware-Example/tags) |
+| Repository | Tests | Version | Swift | Platforms |
+| ---------- | ----- | ------- | ----- | --------- |
+| [DocCMiddleware-Example](https://github.com/bdrelling/DocCMiddleware-Example) | [![](https://img.shields.io/github/workflow/status/bdrelling/DocCMiddleware-Example/Tests?label=)](https://github.com/bdrelling/DocCMiddleware-Example/actions/workflows/tests.yml) | [![](https://img.shields.io/github/v/tag/bdrelling/DocCMiddleware-Example?color=blue&label=)](https://github.com/bdrelling/DocCMiddleware-Example/tags) | [![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fbdrelling%2FDocCMiddleware%2Fbadge%3Ftype%3Dswift-versions&label=)](https://swiftpackageindex.com/bdrelling/DocCMiddleware) |  [![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fbdrelling%2FDocCMiddleware%2Fbadge%3Ftype%3Dplatforms&label=)](https://swiftpackageindex.com/bdrelling/DocCMiddleware) |
 
 #### Templates
 
