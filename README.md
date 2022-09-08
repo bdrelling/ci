@@ -56,3 +56,9 @@ This "monitor" provides act-a-glance CI statuses across all of my actively maint
 | Repository | Tests | Version |
 | ---------- | ----- | ------- |
 | [Template-Swift](https://github.com/bdrelling/Template-Swift) | [![](https://img.shields.io/github/workflow/status/bdrelling/Template-Swift/Tests?label=)](https://github.com/bdrelling/Template-Swift/actions/workflows/tests.yml) | [![](https://img.shields.io/github/v/tag/bdrelling/Template-Swift?color=blue&label=)](https://github.com/bdrelling/Template-Swift/tags) |
+
+#### Jobs
+
+| Repository | Status |
+| ---------- | ------ |
+| [Auditor](https://github.com/bdrelling/Auditor) | [![](https://img.shields.io/github/workflow/status/bdrelling/Auditor/Audit?label=)](https://github.com/bdrelling/Auditor/actions/workflows/audit.yml) |
