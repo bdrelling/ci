@@ -85,5 +85,5 @@ runs:
       uses: actions/upload-artifact@v1
       if: ${{ inputs.output }}
       with:
-        name: Output (${{ inputs.platform }}, Xcode ${{ inputs.xcode-version }})
+        name: Output (${{ inputs.build-method }} ${{ inputs.subcommand }} (${{ inputs.platform }}, swift ${{ inputs.swift-version }}))
         path: ${{ inputs.output }}
