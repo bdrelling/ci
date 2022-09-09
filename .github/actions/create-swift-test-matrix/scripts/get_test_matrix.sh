@@ -69,13 +69,13 @@ for platform in "${platforms_array[@]}"; do
             # Therefore, we have to skip testing *and* building this package with xcodebuild.
             continue
         elif [[ $platform == 'ios' || $platform == 'macos' || $platform == 'tvos' || $platform == 'watchos' ]]; then
-            output="{ 'runner': '${runner}', container: '', 'platform': '${platform}', 'build-method': 'xcodebuild', 'subcommand': '${subcommand}', 'swift-version': '${swift_version}' },"
+            output="{ 'runner': '${runner}', container: \"\", 'platform': '${platform}', 'build-method': 'xcodebuild', 'subcommand': '${subcommand}', 'swift-version': '${swift_version}' },"
             if [ $debug == 'true' ]; then echo "    $output"; fi
             test_matrix+="$output"
         fi
 
         if [ $platform == 'macos' ]; then
-            output="{ 'runner': '${runner}', container: '', 'platform': '${platform}', 'build-method': 'swift', 'subcommand': '${subcommand}', 'swift-version': '${swift_version}' },"
+            output="{ 'runner': '${runner}', container: \"\", 'platform': '${platform}', 'build-method': 'swift', 'subcommand': '${subcommand}', 'swift-version': '${swift_version}' },"
             if [ $debug == 'true' ]; then echo "    $output"; fi
             test_matrix+="$output"
 
