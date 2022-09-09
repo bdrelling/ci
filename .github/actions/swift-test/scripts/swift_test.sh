@@ -49,7 +49,7 @@ done
 #====================#
 
 if [ -z "$scheme" ]; then
-    echo "ERROR: Scheme is required!"
+    echo "ERROR: Scheme is required!" 1>&2
     exit 1
 fi
 
@@ -81,7 +81,7 @@ swift_test() {
         command='swift test --configuration debug'
         ;;
     *)
-        echo "ERROR: Invalid subcommand '${subcommand}'. Valid options are: build, test"
+        echo "ERROR: Invalid subcommand '${subcommand}'. Valid options are: build, test" 1>&2
         exit 1
         ;;
     esac
@@ -101,7 +101,7 @@ swift_test() {
     # TODO: This sort of testing doesn't seem to work well, and currently only works on macOS 12.0+ / Xcode 14+ as written.
     if [[ $platform != 'macos' || $platform != 'linux' ]]; then
         if [[ $arch != 'arm64' && $arch != 'x86_64' ]]; then
-            echo "ERROR: Invalid architecture '${arch}'!"
+            echo "ERROR: Invalid architecture '${arch}'!" 1>&2
             exit 1
         fi
 
@@ -149,7 +149,7 @@ xcodebuild_test() {
         command="xcodebuild clean test -scheme ${scheme}"
         ;;
     *)
-        echo "ERROR: Invalid subcommand '${subcommand}'. Valid options are: build, test"
+        echo "ERROR: Invalid subcommand '${subcommand}'. Valid options are: build, test" 1>&2
         exit 1
         ;;
     esac
@@ -175,7 +175,7 @@ xcodebuild_test() {
         command+=" -destination 'platform=watchOS Simulator,name=Apple Watch Series 6 - 44mm'"
         ;;
     linux)
-        echo "ERROR: Linux cannot run xcodebuild!"
+        echo "ERROR: Linux cannot run xcodebuild!" 1>&2
         exit 1
         ;;
     esac
@@ -202,7 +202,7 @@ run_tests() {
         xcodebuild_test
         ;;
     *)
-        echo "ERROR: Invalid build method '${method}'. Valid options are: swift, xcodebuild"
+        echo "ERROR: Invalid build method '${method}'. Valid options are: swift, xcodebuild" 1>&2
         exit 1
         ;;
     esac
@@ -221,7 +221,7 @@ validate_operating_system() {
     esac
 
     if [ $operating_system != $expected_operating_system ]; then
-        echo "ERROR: Invalid operating system for platform '$platform'! Expected '$expected_operating_system', evaluated '$operating_system'."
+        echo "ERROR: Invalid operating system for platform '$platform'! Expected '$expected_operating_system', evaluated '$operating_system'." 1>&2
         exit 1
     fi
 }

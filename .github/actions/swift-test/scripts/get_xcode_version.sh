@@ -19,7 +19,7 @@ case "$1" in
     xcode_version='14.0'
     ;;
 *)
-    echo "ERROR: Swift version '$1' not supported by this action!"
+    echo "ERROR: Swift version '$1' not supported by this action!" 1>&2
     exit 1
     ;;
 esac

@@ -26,11 +26,11 @@ get_runner() {
         5.3 | 5.4)
             echo 'macos-11'
             ;;
-        5.5 | 5.6)
+        5.5 | 5.6 | 5.7)
             echo 'macos-12'
             ;;
         *)
-            echo "ERROR: Swift version '$2' not supported by this action!"
+            echo "ERROR: Swift version '$2' not supported by this action!" 1>&2
             exit 1
             ;;
         esac
@@ -70,11 +70,11 @@ for platform in "${platforms_array[@]}"; do
             continue
         fi
 
-        build-method='swift'
+        build_method='swift'
         container=''
 
         if [[ $platform == 'ios' || $platform == 'macos' || $platform == 'tvos' || $platform == 'watchos' ]]; then
-            build-method='xcodebuild'
+            build_method='xcodebuild'
         elif [ $platform == 'linux' ]; then
             container="swift:${swift_version}-focal"
 
