@@ -65,7 +65,8 @@ runs:
 
     # TODO: Verify that this doesn't add time if the container has the right version! If it does, we need another check.
     - name: Setup Swift
-      if: ${{ runner.os == 'Linux' }}
+      # FIXME: Revert when 5.7 is valid here in a few days.
+      if: ${{ runner.os == 'Linux' || inputs.swift-version != '5.7' }}
       uses: swift-actions/setup-swift@v1
       with:
         swift-version: ${{ inputs.swift-version }}

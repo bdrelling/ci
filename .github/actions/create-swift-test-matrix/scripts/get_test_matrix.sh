@@ -69,13 +69,25 @@ for platform in "${platforms_array[@]}"; do
             # Therefore, we have to skip testing *and* building this package with xcodebuild.
             continue
         elif [[ $platform == 'ios' || $platform == 'macos' || $platform == 'tvos' || $platform == 'watchos' ]]; then
-            output="{ 'runner': '${runner}', 'platform': '${platform}', 'build-method': 'xcodebuild', 'subcommand': '${subcommand}', 'swift-version': '${swift_version}' },"
+            output="{ 'runner': '${runner}', container: '', 'platform': '${platform}', 'build-method': 'xcodebuild', 'subcommand': '${subcommand}', 'swift-version': '${swift_version}' },"
             if [ $debug == 'true' ]; then echo "    $output"; fi
             test_matrix+="$output"
         fi
 
-        if [[ $platform == 'macos' || $platform == 'linux' ]]; then
-            output="{ 'runner': '${runner}', 'platform': '${platform}', 'build-method': 'swift', 'subcommand': '${subcommand}', 'swift-version': '${swift_version}' },"
+        if [ $platform == 'macos' ]; then
+            output="{ 'runner': '${runner}', container: '', 'platform': '${platform}', 'build-method': 'swift', 'subcommand': '${subcommand}', 'swift-version': '${swift_version}' },"
+            if [ $debug == 'true' ]; then echo "    $output"; fi
+            test_matrix+="$output"
+
+        elif [ $platform == 'linux' ]; then
+            container='swift:${swift_version}-focal'
+
+            # TODO: Remove this block once 5.7-focal is available.
+            if [ $swift_version == '5.7' ]; then
+                container='swiftlang/swift:nightly-5.7-focal'
+            fi
+
+            output="{ 'runner': '${runner}', container: '${container}', 'platform': '${platform}', 'build-method': 'swift', 'subcommand': '${subcommand}', 'swift-version': '${swift_version}' },"
             if [ $debug == 'true' ]; then echo "    $output"; fi
             test_matrix+="$output"
         fi
