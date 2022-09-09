@@ -76,7 +76,7 @@ for platform in "${platforms_array[@]}"; do
         if [[ $platform == 'ios' || $platform == 'macos' || $platform == 'tvos' || $platform == 'watchos' ]]; then
             build-method='xcodebuild'
         elif [ $platform == 'linux' ]; then
-            container='swift:${swift_version}-focal'
+            container="swift:${swift_version}-focal"
 
             # TODO: Remove this block once 5.7-focal is available.
             if [ $swift_version == '5.7' ]; then
@@ -85,12 +85,12 @@ for platform in "${platforms_array[@]}"; do
         fi
 
         output="{ "
-        output+="'runner': '${runner}', "
-        output+="'container': '${container}', "
-        output+="'platform': '${platform}', "
-        output+="'build-method': '${build_method}', "
-        output+="'subcommand': '${subcommand}', "
-        output+="'swift-version': '${swift_version}'"
+        output+="\"runner\": \"${runner}\", "
+        output+="\"container\": \"${container}\", "
+        output+="\"platform\": \"${platform}\", "
+        output+="\"build-method\": \"${build_method}\", "
+        output+="\"subcommand\": \"${subcommand}\", "
+        output+="\"swift-version\": \"${swift_version}\""
         output+=" },"
 
         if [ $debug == 'true' ]; then echo "    $output"; fi
