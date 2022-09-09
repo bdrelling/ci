@@ -68,17 +68,13 @@ for platform in "${platforms_array[@]}"; do
             # XCTest is not compatible with watchOS when compiling for Swift 5.3.
             # Therefore, we have to skip testing *and* building this package with xcodebuild.
             continue
-        elif [[ $platform == 'ios' || $platform == 'macos' || $platform == 'tvos' || $platform == 'watchos' ]]; then
-            output="{ 'runner': '${runner}', container: \"\", 'platform': '${platform}', 'build-method': 'xcodebuild', 'subcommand': '${subcommand}', 'swift-version': '${swift_version}' },"
-            if [ $debug == 'true' ]; then echo "    $output"; fi
-            test_matrix+="$output"
         fi
 
-        if [ $platform == 'macos' ]; then
-            output="{ 'runner': '${runner}', container: \"\", 'platform': '${platform}', 'build-method': 'swift', 'subcommand': '${subcommand}', 'swift-version': '${swift_version}' },"
-            if [ $debug == 'true' ]; then echo "    $output"; fi
-            test_matrix+="$output"
+        build-method='swift'
+        container=''
 
+        if [[ $platform == 'ios' || $platform == 'macos' || $platform == 'tvos' || $platform == 'watchos' ]]; then
+            build-method='xcodebuild'
         elif [ $platform == 'linux' ]; then
             container='swift:${swift_version}-focal'
 
@@ -86,11 +82,19 @@ for platform in "${platforms_array[@]}"; do
             if [ $swift_version == '5.7' ]; then
                 container='swiftlang/swift:nightly-5.7-focal'
             fi
-
-            output="{ 'runner': '${runner}', container: '${container}', 'platform': '${platform}', 'build-method': 'swift', 'subcommand': '${subcommand}', 'swift-version': '${swift_version}' },"
-            if [ $debug == 'true' ]; then echo "    $output"; fi
-            test_matrix+="$output"
         fi
+
+        output="{ "
+        output+="'runner': '${runner}', "
+        output+="'container': '${container}', "
+        output+="'platform': '${platform}', "
+        output+="'build-method': '${build_method}', "
+        output+="'subcommand': '${subcommand}', "
+        output+="'swift-version': '${swift_version}'"
+        output+=" },"
+
+        if [ $debug == 'true' ]; then echo "    $output"; fi
+        test_matrix+="$output"
     done
 done
 
