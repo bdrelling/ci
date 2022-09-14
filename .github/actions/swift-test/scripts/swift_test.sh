@@ -15,6 +15,10 @@ arch=$(uname -m)
 # Define our default subcommand, which is "test".
 subcommand='test'
 
+# Define the current xcode version.
+# This code extracts the major version of Xcode only. (eg. "14", not "14.0")
+xcode_version=$(xcodebuild -version | head -n 1 | sed -r 's/Xcode ([0-9]+).[0-9]/\1/')
+
 # Our default platform is Linux on Linux operating systems or macOS on Darwin (Apple) operating systems.
 if [ $operating_system == 'Linux' ]; then
     platform='linux'
@@ -160,19 +164,29 @@ xcodebuild_test() {
     # TODO: Investigate generic platform usage -- it works sometimes, not always
     case $platform in
     ios)
-        # command+=" -destination 'generic/platform=ios'"
         command+=" -destination 'platform=iOS Simulator,name=iPhone 12 Pro'"
         ;;
     macos)
         command+=" -destination 'platform=macOS,arch=${arch}'"
         ;;
     tvos)
-        # command+=" -destination 'generic/platform=tvos'"
         command+=" -destination 'platform=tvOS Simulator,name=Apple TV'"
         ;;
     watchos)
-        # command+=" -destination 'generic/platform=watchos'"
-        command+=" -destination 'platform=watchOS Simulator,name=Apple Watch SE (44mm) (2nd generation)'"
+        case $xcode_version in
+        12 | 13)
+            device_name="Apple Watch Series 6 - 44mm"
+            ;;
+        14)
+            device_name="Apple Watch Series 6 (44mm)"
+            ;;
+        *)
+            echo "ERROR: Invalid xcode_version '${xcode_version}. This script may not be compatible." 1>&2
+            exit 1
+            ;;
+        esac
+
+        command+=" -destination 'platform=watchOS Simulator,name=${device_name}'"
         ;;
     linux)
         echo "ERROR: Linux cannot run xcodebuild!" 1>&2
