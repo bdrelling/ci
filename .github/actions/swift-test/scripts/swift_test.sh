@@ -172,7 +172,7 @@ xcodebuild_test() {
         ;;
     watchos)
         # command+=" -destination 'generic/platform=watchos'"
-        command+=" -destination 'platform=watchOS Simulator,name=Apple Watch Series 6 - 44mm'"
+        command+=" -destination 'platform=watchOS Simulator,name=Apple Watch SE (44mm) (2nd generation)'"
         ;;
     linux)
         echo "ERROR: Linux cannot run xcodebuild!" 1>&2
