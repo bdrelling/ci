@@ -173,6 +173,7 @@ xcodebuild_test() {
         command+=" -destination 'platform=tvOS Simulator,name=Apple TV'"
         ;;
     watchos)
+        #
         case $xcode_version in
         12 | 13)
             device_name="Apple Watch Series 6 - 44mm"
