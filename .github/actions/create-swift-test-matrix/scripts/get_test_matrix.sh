@@ -77,11 +77,6 @@ for platform in "${platforms_array[@]}"; do
             build_method='xcodebuild'
         elif [ $platform == 'linux' ]; then
             container="swift:${swift_version}-focal"
-
-            # TODO: Remove this block once 5.7-focal is available.
-            if [ $swift_version == '5.7' ]; then
-                container='swiftlang/swift:nightly-5.7-focal'
-            fi
         fi
 
         output="{ "
