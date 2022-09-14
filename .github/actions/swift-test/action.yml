@@ -63,12 +63,12 @@ runs:
       with:
         xcode-version: ${{ steps.get-xcode-version.outputs.xcode-version }}
 
-    # TODO: Verify that this doesn't add time if the container has the right version! If it does, we need another check.
-    - name: Setup Swift
-      if: ${{ runner.os == 'Linux' }}
-      uses: swift-actions/setup-swift@v1
-      with:
-        swift-version: ${{ inputs.swift-version }}
+    # Temporarily disabled due to issue: https://github.com/swift-actions/setup-swift/issues/471
+    # - name: Setup Swift
+    #   if: ${{ runner.os == 'Linux' }}
+    #   uses: swift-actions/setup-swift@v1
+    #   with:
+    #     swift-version: ${{ inputs.swift-version }}
 
     # Print the version of Swift we're using.
     - name: Swift Version Check
