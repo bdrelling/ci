@@ -17,7 +17,7 @@ subcommand='test'
 
 # Define the current xcode version.
 # This code extracts the major version of Xcode only. (eg. "14", not "14.0")
-xcode_version=$(xcodebuild -version | head -n 1 | sed -r 's/Xcode ([0-9]+).[0-9]/\1/')
+xcode_version=$(xcodebuild -version | head -n 1 | sed -r 's/Xcode ([0-9]+)[.0-9]*/\1/')
 
 # Our default platform is Linux on Linux operating systems or macOS on Darwin (Apple) operating systems.
 if [ $operating_system == 'Linux' ]; then
@@ -173,7 +173,7 @@ xcodebuild_test() {
         command+=" -destination 'platform=tvOS Simulator,name=Apple TV'"
         ;;
     watchos)
-        #
+        # TODO: Resolve after GitHub Actions issue is resolved: https://github.com/actions/runner-images/issues/6243
         case $xcode_version in
         12 | 13)
             device_name="Apple Watch Series 6 - 44mm"
