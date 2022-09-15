@@ -31,6 +31,7 @@ inputs:
   output:
     description: 'The output directory for build and test output.'
     required: false
+    default: output
   # TODO: Make this auto-capture within scripts?
   subcommand:
     description: 'The subcommand to use. Valid options are: build, test'
