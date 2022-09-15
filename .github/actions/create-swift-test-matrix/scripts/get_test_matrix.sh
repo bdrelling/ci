@@ -73,7 +73,8 @@ for platform in "${platforms_array[@]}"; do
         build_method='swift'
         container=''
 
-        if [[ $platform == 'ios' || $platform == 'macos' || $platform == 'tvos' || $platform == 'watchos' ]]; then
+        if [[ $platform == 'ios' || $platform == 'tvos' || $platform == 'watchos' ]]; then
+            # iOS, tvOS, and watchOS still require xcodebuild for building and testing via the command line.
             build_method='xcodebuild'
         elif [ $platform == 'linux' ]; then
             container="swift:${swift_version}-focal"
