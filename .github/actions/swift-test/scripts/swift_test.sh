@@ -195,6 +195,9 @@ xcodebuild_test() {
         ;;
     esac
 
+    # Output the result of our builds.
+    command+=" -resultBundlePath ${output}/${subcommand}.xcresult"
+
     # Print the command for debugging before we run it.
     echo "============================================================"
     echo "Running command:"
