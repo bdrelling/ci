@@ -26,12 +26,11 @@ on:
       DISCORD_CI_WEBHOOK:
         required: true
 
-jobs:
-  # Prepare our workflow.
-  prepare:
-    name: Prepare
-    uses: ./.github/workflows/prepare.yml
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
+jobs:
   # Generate a dynamic matrix to use for testing.
   create_swift_test_matrix:
     name: Create Swift Test Matrix
