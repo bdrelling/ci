@@ -5,7 +5,7 @@ set -e
 # Fake inputs for testing.
 debug=${DEBUG_SWIFT_TEST_MATRIX-'false'}
 platforms=${1-'macOS'}
-swift_versions=${2-'5.6'}
+swift_versions=${2-'5.7'}
 subcommand=${3-'test'}
 
 # Define our constants.

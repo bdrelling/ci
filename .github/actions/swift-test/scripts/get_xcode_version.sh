@@ -16,7 +16,7 @@ case "$1" in
     xcode_version='13.4'
     ;;
 5.7)
-    xcode_version='14.0'
+    xcode_version='14.2'
     ;;
 *)
     echo "ERROR: Swift version '$1' not supported by this action!" 1>&2
