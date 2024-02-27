@@ -21,7 +21,7 @@ on:
         description: 'A space-delimited list of Swift version to test. Does not support patch versions (eg. 5.4.1).  Valid options are: 5.3 or greater'
         required: false
         type: string
-        default: '5.9'
+        default: '5.7 5.8 5.9'
     secrets:
       DISCORD_CI_WEBHOOK:
         required: true

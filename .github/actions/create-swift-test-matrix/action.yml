@@ -16,7 +16,7 @@ inputs:
   swift-versions:
     description: 'A space-delimited list of Swift versions to use for compilation. Only supports MAJOR.MINOR syntax (eg. 5.5, not 5.5.1).'
     required: false
-    default: '5.9'
+    default: '5.7 5.8 5.9'
   subcommand:
     description: 'The subcommand to generate the test matrix for. Valid options are: build, test'
     required: false
