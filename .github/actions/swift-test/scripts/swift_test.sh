@@ -95,12 +95,6 @@ swift_test() {
         command+=" --enable-code-coverage"
     fi
 
-    # If we're running on Linux, add the --enable-test-discovery flag.
-    # This is only required in Swift versions before 5.5, but adding it is safe.
-    if [ $platform == 'linux' ]; then
-        command+=" --enable-test-discovery"
-    fi
-
     # If we're not running on the macOS or Linux platforms, we need to pass an SDK into the command.
     # TODO: This sort of testing doesn't seem to work well, and currently only works on macOS 12.0+ / Xcode 14+ as written.
     if [[ $platform != 'macos' || $platform != 'linux' ]]; then
@@ -159,12 +153,12 @@ xcodebuild_test() {
     esac
 
     # Add our destination to the xcodebuild command.
-    # The devices used here support Xcode 12 and Xcode 13 explicitly.
+    # The devices used here support Xcode 14 and Xcode 15 explicitly.
     # To get valid destinations, run "xcodebuild -showdestinations -scheme <package_name>"
     # TODO: Investigate generic platform usage -- it works sometimes, not always
     case $platform in
     ios)
-        command+=" -destination 'platform=iOS Simulator,name=iPhone 12 Pro'"
+        command+=" -destination 'platform=iOS Simulator,name=iPhone 14 Pro'"
         ;;
     macos)
         command+=" -destination 'platform=macOS,arch=${arch}'"

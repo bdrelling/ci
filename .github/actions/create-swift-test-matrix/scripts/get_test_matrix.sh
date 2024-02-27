@@ -23,12 +23,6 @@ get_runner() {
         # Our second argument is the swift_version.
         # GitHub's macOS runners come with different versions of Xcode preinstalled.
         case "$2" in
-        5.3 | 5.4)
-            echo 'macos-11'
-            ;;
-        5.5 | 5.6)
-            echo 'macos-12'
-            ;;
         5.7 | 5.8)
             echo 'macos-13'
             ;;
