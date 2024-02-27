@@ -22,7 +22,7 @@ inputs:
   swift-version:
     description: 'The version of Swift to use. Valid options are 5.3+. Does not support minor/patch versioning.'
     required: false
-    default: '5.6'
+    default: '5.9'
   # TODO: Make this auto-capture within scripts?
   build-method:
     description: 'The build method to use. Valid options are: swift, xcodebuild'

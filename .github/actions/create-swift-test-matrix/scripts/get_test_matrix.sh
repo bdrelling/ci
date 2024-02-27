@@ -5,7 +5,7 @@ set -e
 # Fake inputs for testing.
 debug=${DEBUG_SWIFT_TEST_MATRIX-'false'}
 platforms=${1-'macOS'}
-swift_versions=${2-'5.6'}
+swift_versions=${2-'5.9'}
 subcommand=${3-'test'}
 
 # Define our constants.
@@ -26,11 +26,17 @@ get_runner() {
         5.3 | 5.4)
             echo 'macos-11'
             ;;
-        5.5 | 5.6 | 5.7)
+        5.5 | 5.6)
             echo 'macos-12'
             ;;
+        5.7 | 5.8)
+            echo 'macos-13'
+            ;;
+        5.9)
+            echo 'macos-14'
+            ;;
         *)
-            echo "ERROR: Swift version '$2' not supported by this action!" 1>&2
+            echo "ERROR: Swift version '$2' not supported by this action! get_test_matrix.sh may need to be updated" 1>&2
             exit 1
             ;;
         esac
