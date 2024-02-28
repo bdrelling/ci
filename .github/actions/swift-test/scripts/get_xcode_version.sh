@@ -22,4 +22,4 @@ case "$1" in
 esac
 
 # Echo our Xcode version as GitHub Actions step output.
-echo "::set-output name=xcode-version::${xcode_version}"
+echo "xcode-version=${xcode_version}" >>$GITHUB_OUTPUT

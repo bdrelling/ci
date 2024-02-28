@@ -99,4 +99,4 @@ fi
 test_matrix+="]"
 
 # Echo our Xcode version as GitHub Actions step output.
-echo "::set-output name=test-matrix::${test_matrix}"
+echo "test_matrix=${test_matrix}" >>$GITHUB_OUTPUT
