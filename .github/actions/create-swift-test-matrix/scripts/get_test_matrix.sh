@@ -63,13 +63,6 @@ test_matrix="["
 for platform in "${platforms_array[@]}"; do
     for swift_version in "${swift_versions_array[@]}"; do
         runner=$(get_runner $platform $swift_version)
-
-        if [[ $subcommand == 'test' && $platform == 'watchos' && $swift_version == '5.3' ]]; then
-            # XCTest is not compatible with watchOS when compiling for Swift 5.3.
-            # Therefore, we have to skip testing *and* building this package with xcodebuild.
-            continue
-        fi
-
         build_method='swift'
         container=''
 

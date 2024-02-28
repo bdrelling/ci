@@ -153,41 +153,56 @@ xcodebuild_test() {
     esac
 
     # Add our destination to the xcodebuild command.
-    # The devices used here support Xcode 14 and Xcode 15 explicitly.
+    # The devices used here support Xcode 14 and up explicitly.
     # To get valid destinations, run "xcodebuild -showdestinations -scheme <package_name>"
     # TODO: Investigate generic platform usage -- it works sometimes, not always
     case $platform in
     ios)
-        command+=" -destination 'platform=iOS Simulator,name=iPhone 14 Pro'"
-        ;;
-    macos)
-        command+=" -destination 'platform=macOS,arch=${arch}'"
-        ;;
-    tvos)
-        command+=" -destination 'platform=tvOS Simulator,name=Apple TV'"
-        ;;
-    watchos)
-        # TODO: Resolve after GitHub Actions issue is resolved: https://github.com/actions/runner-images/issues/6243
+        simulator="iOS Simulator"
+
+        # For more granular device selection, we can use the xcode_version to select a specific device.
         case $xcode_version in
-        12 | 13)
-            device_name="Apple Watch Series 6 - 44mm"
-            ;;
         14)
-            device_name="Apple Watch Series 6 (44mm)"
+            device_name="iPhone 14 Pro"
             ;;
-        *)
-            echo "ERROR: Invalid xcode_version '${xcode_version}. This script may not be compatible." 1>&2
-            exit 1
+        15)
+            device_name="iPhone 15 Pro"
             ;;
         esac
+        ;;
+    macos)
+        simulator="macOS"
+        device_name="${arch}"
+        ;;
+    tvos)
+        simulator="tvOS Simulator"
+        device_name="Apple TV"
+        ;;
+    watchos)
+        simulator="watchOS Simulator"
 
-        command+=" -destination 'platform=watchOS Simulator,name=${device_name}'"
+        case $xcode_version in
+        14)
+            device_name="Apple Watch Series 8 (45mm)"
+            ;;
+        15)
+            device_name="Apple Watch Series 9 (45mm)"
+            ;;
+        esac
         ;;
     linux)
         echo "ERROR: Linux cannot run xcodebuild!" 1>&2
         exit 1
         ;;
     esac
+
+    # Check if device_name is nil and throw an error if so.
+    if [ -z "$device_name" ]; then
+        echo "ERROR: Invalid device_name for platform '${platform}' and xcode_version '${xcode_version}'!" 1>&2
+        exit 1
+    fi
+
+    command+=" -destination 'platform=#{simulator},name=${device_name}'"
 
     # Output the result of our builds.
     command+=" -resultBundlePath ${output}/${subcommand}.xcresult"
