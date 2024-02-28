@@ -209,7 +209,7 @@ xcodebuild_test() {
         exit 1
     fi
 
-    command+=" -destination 'platform=#{simulator},name=${device_name}'"
+    command+=" -destination 'platform=${simulator},name=${device_name}'"
 
     # Output the result of our builds.
     command+=" -resultBundlePath ${output}/${subcommand}.xcresult"
