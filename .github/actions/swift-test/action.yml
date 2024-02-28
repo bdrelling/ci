@@ -15,12 +15,12 @@ inputs:
     required: true
   # TODO: Make this auto-capture within scripts?
   platform:
-    description: 'The platform to run tests on. Valid options are: iOS, macOS, tvOS, watchOS, Linux'
+    description: 'The platform to run tests on. Valid options are: iOS, macOS, tvOS, watchOS, visionOS, Linux'
     required: false
     default: macOS
   # TODO: Make this auto-capture within scripts?
   swift-version:
-    description: 'The version of Swift to use. Valid options are 5.3+. Does not support minor/patch versioning.'
+    description: 'The version of Swift to use. Valid options are 5.7+. Does not support minor/patch versioning.'
     required: false
     default: '5.9'
   # TODO: Make this auto-capture within scripts?

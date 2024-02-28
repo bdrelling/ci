@@ -113,6 +113,9 @@ swift_test() {
         watchos)
             command+=" -Xswiftc '-sdk' -Xswiftc '$(xcrun --sdk watchsimulator --show-sdk-path)' -Xswiftc '-target' -Xswiftc '${arch}-apple-watchos9.0-simulator'"
             ;;
+        visionos)
+            command+=" -Xswiftc '-sdk' -Xswiftc '$(xcrun --sdk watchsimulator --show-sdk-path)' -Xswiftc '-target' -Xswiftc '${arch}-apple-visionos1.0-simulator'"
+            ;;
         esac
     fi
 
@@ -189,6 +192,10 @@ xcodebuild_test() {
             device_name="Apple Watch Series 9 (45mm)"
             ;;
         esac
+        ;;
+    visionos)
+        simulator="visionOS Simulator"
+        device_name="Apple Vision Pro"
         ;;
     linux)
         echo "ERROR: Linux cannot run xcodebuild!" 1>&2

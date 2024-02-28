@@ -13,12 +13,12 @@ on:
         type: string
         default: test
       platforms:
-        description: 'A space-delimited list of platforms to test. Valid options are: iOS, macOS, tvOS, watchOS, Linux'
+        description: 'A space-delimited list of platforms to test. Valid options are: iOS, macOS, tvOS, watchOS, visionOS, Linux'
         required: false
         type: string
         default: macOS
       swift-versions:
-        description: 'A space-delimited list of Swift version to test. Does not support patch versions (eg. 5.4.1).  Valid options are: 5.3 or greater'
+        description: 'A space-delimited list of Swift version to test. Does not support patch versions (eg. 5.4.1).  Valid options are: 5.7 or greater'
         required: false
         type: string
         default: '5.7 5.8 5.9'

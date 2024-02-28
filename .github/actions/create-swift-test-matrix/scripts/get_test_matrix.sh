@@ -63,10 +63,12 @@ test_matrix="["
 for platform in "${platforms_array[@]}"; do
     for swift_version in "${swift_versions_array[@]}"; do
         runner=$(get_runner $platform $swift_version)
+
+        # Default parameters match macOS' build preferences.
         build_method='swift'
         container=''
 
-        if [[ $platform == 'ios' || $platform == 'tvos' || $platform == 'watchos' ]]; then
+        if [[ $platform == 'ios' || $platform == 'tvos' || $platform == 'watchos' || $platform == 'visionos' ]]; then
             # iOS, tvOS, and watchOS still require xcodebuild for building and testing via the command line.
             build_method='xcodebuild'
         elif [ $platform == 'linux' ]; then
