@@ -82,7 +82,7 @@ runs:
       shell: bash
 
     - name: Upload Step Output
-      uses: actions/upload-artifact@v1
+      uses: actions/upload-artifact@v4
       if: ${{ inputs.output }}
       with:
         name: Output (${{ inputs.build-method }} ${{ inputs.subcommand }} (${{ inputs.platform }}, swift ${{ inputs.swift-version }}))

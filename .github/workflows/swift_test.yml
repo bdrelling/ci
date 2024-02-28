@@ -60,7 +60,7 @@ jobs:
         inputs: ${{ fromJSON(needs.create_swift_test_matrix.outputs.test-matrix) }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Run Tests
         # As of September 2022, we cannot reference local actions from a reusable workflow.
         uses: bdrelling/ci/.github/actions/swift-test@main

@@ -8,7 +8,10 @@ jobs:
     name: Prepare
     runs-on: ubuntu-latest
     steps:
+      - name: Deprecation Notice
+        run: echo "::warning file=prepare.yml,line=15::styfle/cancel-workflow-action is deprecated, use the concurrency key instead"
+        shell: bash
       - name: Cancel Previous Runs
-        uses: styfle/cancel-workflow-action@0.11.0
+        uses: styfle/cancel-workflow-action@0.12.1
         with:
           access_token: ${{ github.token }}
