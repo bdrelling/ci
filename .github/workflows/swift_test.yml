@@ -89,6 +89,7 @@ jobs:
         if: ${{ inputs.code-coverage }}
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
+          fail_ci_if_error: true
 
   # Send notification to Discord on failure.
   send_notification:
