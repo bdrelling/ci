@@ -73,6 +73,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: TESTING
+        run: echo "${{ matrix.inputs.code-coverage }}"
       - name: Run Tests
         # As of September 2022, we cannot reference local actions from a reusable workflow.
         uses: bdrelling/ci/.github/actions/swift-test@main
@@ -82,11 +84,11 @@ jobs:
           build-method: ${{ matrix.inputs.build-method }}
           subcommand: ${{ matrix.inputs.subcommand }}
           swift-version: ${{ matrix.inputs.swift-version }}
-          code-coverage: ${{ matrix.inputs.code-coverage }}
+          code-coverage: ${{ matrix.inputs.code-coverage == true }}
           args: ${{ inputs.args }}
       - name: Upload to Codecov
         uses: codecov/codecov-action@v4
-        if: ${{ matrix.inputs.code-coverage }}
+        if: ${{ matrix.inputs.code-coverage == true }}
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           fail_ci_if_error: true
