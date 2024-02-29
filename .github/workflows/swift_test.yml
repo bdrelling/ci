@@ -22,6 +22,11 @@ on:
         required: false
         type: string
         default: '5.7 5.8 5.9'
+      code-coverage:
+        description: 'Whether or not code coverage should be generated and uploadded.'
+        required: false
+        type: boolean
+        default: false
       args:
         description: 'Additional arguments to use. For valid options, run `$ swift <subcommand> --help`.'
         required: false
@@ -77,10 +82,11 @@ jobs:
           build-method: ${{ matrix.inputs.build-method }}
           subcommand: ${{ matrix.inputs.subcommand }}
           swift-version: ${{ matrix.inputs.swift-version }}
+          code-coverage: ${{ inputs.code-coverage }}
           args: ${{ inputs.args }}
       - name: Upload to Codecov
         uses: codecov/codecov-action@v4
-        if: ${{ secrets.CODECOV_TOKEN != '' }}
+        if: ${{ inputs.code-coverage == true }}
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           # handle_no_reports_found: false

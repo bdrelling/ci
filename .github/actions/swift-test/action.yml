@@ -37,6 +37,10 @@ inputs:
     description: 'The subcommand to use. Valid options are: build, test'
     required: false
     default: test
+  code-coverage:
+    description: 'Whether or not code coverage should be generated and uploaded.'
+    required: false
+    default: ''
   args:
     description: 'Additional arguments to use. For valid options, run `$ swift <subcommand> --help`.'
     required: false
@@ -82,7 +86,7 @@ runs:
       shell: sh
 
     - name: Run Tests
-      run: ${GITHUB_ACTION_PATH}/scripts/swift_test.sh --scheme ${{ inputs.scheme }} --method ${{ inputs.build-method }} --platform ${{ inputs.platform }} --subcommand ${{ inputs.subcommand }} --output ${{ inputs.output }} ${{ inputs.args }}
+      run: ${GITHUB_ACTION_PATH}/scripts/swift_test.sh --scheme ${{ inputs.scheme }} --method ${{ inputs.build-method }} --platform ${{ inputs.platform }} --subcommand ${{ inputs.subcommand }} --output ${{ inputs.output }} ${{ if ne(inputs.args, '') && ne(inputs.args, 'false') }}--codecov true{{ endif }}
       shell: bash
       
     # - name: Codecov
