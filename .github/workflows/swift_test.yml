@@ -26,7 +26,6 @@ on:
         description: 'Whether or not code coverage should be generated and uploadded.'
         required: false
         type: boolean
-        default: false
       args:
         description: 'Additional arguments to use. For valid options, run `$ swift <subcommand> --help`.'
         required: false
