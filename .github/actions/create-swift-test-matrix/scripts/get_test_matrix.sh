@@ -3,10 +3,11 @@
 set -e
 
 # Fake inputs for testing.
-debug=${DEBUG_SWIFT_TEST_MATRIX-'false'}
-platforms=${1-'macOS'}
-swift_versions=${2-'5.9'}
+debug=${DEBUG_SWIFT_TEST_MATRIX-'true'}
+platforms=${1-'iOS macOS tvOS watchOS Linux'}
+swift_versions=${2-'5.7 5.8 5.9'}
 subcommand=${3-'test'}
+code_coverage=${4-'false'}
 
 # Define our constants.
 delimeter=" "
@@ -86,7 +87,7 @@ for platform in "${platforms_array[@]}"; do
         output+="\"subcommand\": \"${subcommand}\", "
         output+="\"swift-version\": \"${swift_version}\", "
 
-        if [ $swift_version == $highest_swift_version ]; then
+        if [ $code_coverage == 'true' ] && [ $swift_version == $highest_swift_version ]; then
             output+="\"code-coverage\": true"
         else
             output+="\"code-coverage\": false"
@@ -109,4 +110,4 @@ fi
 test_matrix+="]"
 
 # Echo our Xcode version as GitHub Actions step output.
-echo "test-matrix=${test_matrix}" >>$GITHUB_OUTPUT
+# echo "test-matrix=${test_matrix}" >>$GITHUB_OUTPUT

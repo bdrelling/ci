@@ -32,6 +32,6 @@ runs:
       id: get-test-matrix
       env:
         DEBUG_SWIFT_TEST_MATRIX: ${{ inputs.debug }}
-      run: scripts/get_test_matrix.sh '${{ inputs.platforms }}' '${{ inputs.swift-versions }}' ${{ inputs.subcommand }}
+      run: scripts/get_test_matrix.sh '${{ inputs.platforms }}' '${{ inputs.swift-versions }}' ${{ inputs.subcommand }} ${{ inputs.code-coverage }}
       shell: bash
       working-directory: ${{ github.action_path }}
