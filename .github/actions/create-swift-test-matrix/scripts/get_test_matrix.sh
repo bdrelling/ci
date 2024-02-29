@@ -87,9 +87,9 @@ for platform in "${platforms_array[@]}"; do
         output+="\"swift-version\": \"${swift_version}\", "
 
         if [ $swift_version == $highest_swift_version ]; then
-            output+="\"codecov\": true"
+            output+="\"code-coverage\": true"
         else
-            output+="\"codecov\": false"
+            output+="\"code-coverage\": false"
         fi
 
         output+=" },"
