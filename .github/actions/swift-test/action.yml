@@ -82,7 +82,7 @@ runs:
       shell: sh
 
     - name: Run Tests
-      run: ${GITHUB_ACTION_PATH}/scripts/swift_test.sh --scheme ${{ inputs.scheme }} --method ${{ inputs.build-method }} --platform ${{ inputs.platform }} --subcommand ${{ inputs.subcommand }} --output ${{ inputs.output }} {{ inputs.args }}
+      run: ${GITHUB_ACTION_PATH}/scripts/swift_test.sh --scheme ${{ inputs.scheme }} --method ${{ inputs.build-method }} --platform ${{ inputs.platform }} --subcommand ${{ inputs.subcommand }} --output ${{ inputs.output }} ${{ inputs.args }}
       shell: bash
       
     # - name: Codecov
