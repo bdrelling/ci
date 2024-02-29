@@ -30,6 +30,8 @@ on:
     secrets:
       DISCORD_CI_WEBHOOK:
         required: true
+      CODECOV_TOKEN:
+        required: false
 
 concurrency:
   group: ${{ github.ref }}-${{ github.workflow }}
@@ -76,6 +78,14 @@ jobs:
           subcommand: ${{ matrix.inputs.subcommand }}
           swift-version: ${{ matrix.inputs.swift-version }}
           args: ${{ inputs.args }}
+      - name: Upload to Codecov
+        uses: codecov/codecov-action@v4
+        if: ${{ secrets.CODECOV_TOKEN != '' }}
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          # handle_no_reports_found: false
+          # directory: ${{ env.COVERAGE_REPORT_DIRECTORY }}
+          verbose: true
 
   # Send notification to Discord on failure.
   send_notification:
