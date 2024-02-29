@@ -70,6 +70,10 @@ subcommand=$(echo "$subcommand" | tr '[:upper:]' '[:lower:]')
 # Define Functions
 #====================#
 
+swift_version() {
+    swift --version 2>&1 | sed -nE 's/.*Apple Swift version ([0-9]+\.[0-9]+).*/\1/p'
+}
+
 swift_test() {
     set -e
 
@@ -131,7 +135,17 @@ swift_test() {
     # Copy code coverage results into the output directory, if applicable.
     if [[ -n "$codecov" && -n "$output" ]]; then
         echo "Copying code coverage results into directory '${output}'."
-        cp $(swift test --show-codecov-path) "${output}/codecov.json"
+        swift_version=$(swift_version)
+
+        if [[ $swift_version == 5.8 ]]; then
+            # In Swift 5.8 / Xcode 14.3, there is a bug where --enable-code-coverage is required when running --show-codecov-path.
+            # This bug is fixed in Swift 5.9 / Xcode 15.0.
+            code_coverage_path=$(swift test --show-codecov-path --enable-code-coverage)
+        else
+            code_coverage_path=$(swift test --show-codecov-path)
+        fi
+
+        cp "$(code_coverage_path)" "${output}/codecov.json"
     fi
 
     echo "============================================================"
