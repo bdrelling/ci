@@ -86,7 +86,10 @@ runs:
       shell: sh
 
     - name: Run Tests
-      run: ${GITHUB_ACTION_PATH}/scripts/swift_test.sh --scheme ${{ inputs.scheme }} --method ${{ inputs.build-method }} --platform ${{ inputs.platform }} --subcommand ${{ inputs.subcommand }} --output ${{ inputs.output }} ${{ if ne(inputs.args, '') && ne(inputs.args, 'false') }}--codecov true{{ endif }}
+      run: | 
+        echo "Code coverage:"
+        echo ${{ inputs.code-coverage }}
+        ${GITHUB_ACTION_PATH}/scripts/swift_test.sh --scheme ${{ inputs.scheme }} --method ${{ inputs.build-method }} --platform ${{ inputs.platform }} --subcommand ${{ inputs.subcommand }} --output ${{ inputs.output }} ${{ inputs.code-coverage == 1 && '--codecov true' || '' }}
       shell: bash
       
     # - name: Codecov
