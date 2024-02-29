@@ -91,9 +91,9 @@ swift_test() {
     esac
 
     # If code coverage is enabled, add it to the command.
-    if [ -n "$codecov" ]; then
-        command+=" --enable-code-coverage"
-    fi
+    # if [ -n "$codecov" ]; then
+    command+=" --enable-code-coverage"
+    # fi
 
     # If we're not running on the macOS or Linux platforms, we need to pass an SDK into the command.
     # TODO: This sort of testing doesn't seem to work well, and currently only works on macOS 12.0+ / Xcode 14+ as written.
