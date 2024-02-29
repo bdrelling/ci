@@ -60,3 +60,43 @@ This "monitor" provides act-a-glance CI statuses across all of my actively maint
 | Repository | Status |
 | ---------- | ------ |
 | [Auditor](https://github.com/bdrelling/Auditor) | [![](https://img.shields.io/github/actions/workflow/status/bdrelling/Auditor/audit.yml?branch=main&label=)](https://github.com/bdrelling/Auditor/actions/workflows/audit.yml) |
+
+## Usage
+
+You can get up and running by creating the following `tests.yml` file within the `.github/workflows` directory of your repository:
+
+```yaml
+name: Tests
+
+on:
+  # Allows you to manually dispath a workflow via the GitHub Actions UI.
+  workflow_dispatch:
+  # Triggers the workflow on every push to 'main'.
+  push:
+    branches: [main]
+  # Triggers the workflow on every Pull Request where 'main' is the target branch.
+  pull_request:
+    branches: [main]
+
+jobs:
+  swift_test:
+    # Reference the `swift_test.yml` workflow here.
+    uses: bdrelling/ci/.github/workflows/swift_test.yml@main
+    secrets:
+      # Pass in the secrets you want to provide to the script.
+      # Passing in CODECOV_TOKEN and setting code-coverage to true will submit coverage reports to codecov.io.
+      CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+      # Passing in DISCORD_CI_WEBHOOK will send CI notifications to the associated Discord channel.
+      DISCORD_CI_WEBHOOK: ${{ secrets.DISCORD_CI_WEBHOOK }}
+    with:
+      # This is the name of the scheme you want to run.
+      scheme: Kipple-Package
+      # If you have tests, use "test". If you don't have tests, use "build".
+      subcommand: test
+      # The platforms you want to test, which can cover the range of Apple platforms as well as Linux.
+      platforms: iOS macOS tvOS watchOS Linux
+      # Provide the Swift versions you want to test, or don't provide the key to use the default versions.
+      # swift-versions: 5.9
+      # If you have secrets.CODECOV_TOKEN set, you'll need to set this to true manually to submit coverage reports to codecov.io.
+      code-coverage: true
+```

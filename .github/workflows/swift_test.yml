@@ -86,12 +86,9 @@ jobs:
           args: ${{ inputs.args }}
       - name: Upload to Codecov
         uses: codecov/codecov-action@v4
-        if: ${{ inputs.code-coverage == true }}
+        if: ${{ inputs.code-coverage }}
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          # handle_no_reports_found: false
-          # directory: ${{ env.COVERAGE_REPORT_DIRECTORY }}
-          verbose: true
 
   # Send notification to Discord on failure.
   send_notification:
