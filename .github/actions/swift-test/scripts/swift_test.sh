@@ -91,9 +91,9 @@ swift_test() {
     esac
 
     # If code coverage is enabled, add it to the command.
-    # if [ -n "$codecov" ]; then
-    command+=" --enable-code-coverage"
-    # fi
+    if [ -n "$codecov" ]; then
+        command+=" --enable-code-coverage"
+    fi
 
     # If we're not running on the macOS or Linux platforms, we need to pass an SDK into the command.
     # TODO: This sort of testing doesn't seem to work well, and currently only works on macOS 12.0+ / Xcode 14+ as written.
@@ -214,6 +214,11 @@ xcodebuild_test() {
     # Output the result of our builds.
     command+=" -resultBundlePath ${output}/${subcommand}.xcresult"
 
+    # If code coverage is enabled, add it to the command.
+    if [ -n "$codecov" ]; then
+        command+=" -enableCodeCoverage YES"
+    fi
+
     # Print the command for debugging before we run it.
     echo "============================================================"
     echo "Running command:"
@@ -222,6 +227,15 @@ xcodebuild_test() {
 
     # Run our command.
     eval "$command"
+
+    # TODO: Implement code coverage for xcodebuild
+    # Copy code coverage results into the output directory, if applicable.
+    # if [[ -n "$codecov" && -n "$output" ]]; then
+    #     echo "Copying code coverage results into directory '${output}'."
+    #     cp $(swift test --show-codecov-path) "${output}/codecov.json"
+    # fi
+
+    echo "============================================================"
 }
 
 run_tests() {

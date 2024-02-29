@@ -37,6 +37,10 @@ inputs:
     description: 'The subcommand to use. Valid options are: build, test'
     required: false
     default: test
+  args:
+    description: 'Additional arguments to use. For valid options, run `$ swift <subcommand> --help`.'
+    required: false
+    default: ''
 runs:
   using: 'composite'
   steps:
@@ -78,9 +82,16 @@ runs:
       shell: sh
 
     - name: Run Tests
-      run: ${GITHUB_ACTION_PATH}/scripts/swift_test.sh --scheme ${{ inputs.scheme }} --method ${{ inputs.build-method }} --platform ${{ inputs.platform }} --subcommand ${{ inputs.subcommand }} --output ${{ inputs.output }}
+      run: ${GITHUB_ACTION_PATH}/scripts/swift_test.sh --scheme ${{ inputs.scheme }} --method ${{ inputs.build-method }} --platform ${{ inputs.platform }} --subcommand ${{ inputs.subcommand }} --output ${{ inputs.output }} {{ inputs.args }}
       shell: bash
-
+      
+    # - name: Codecov
+    #   run: |
+    #     llvm-cov export -format="lcov" .build/debug/SwiftLoggerPackageTests.xctest -instr-profile .build/debug/codecov/default.profdata > info.lcov
+    #     bash <(curl https://codecov.io/bash)
+    #   shell: bash
+      
+      
     - name: Upload Step Output
       uses: actions/upload-artifact@v4
       if: ${{ inputs.output }}
