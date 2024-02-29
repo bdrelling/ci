@@ -22,6 +22,11 @@ on:
         required: false
         type: string
         default: '5.7 5.8 5.9'
+      args:
+        description: 'Additional arguments to use. For valid options, run `$ swift <subcommand> --help`.'
+        required: false
+        type: string
+        default: ''
     secrets:
       DISCORD_CI_WEBHOOK:
         required: true
@@ -70,6 +75,7 @@ jobs:
           build-method: ${{ matrix.inputs.build-method }}
           subcommand: ${{ matrix.inputs.subcommand }}
           swift-version: ${{ matrix.inputs.swift-version }}
+          args: ${{ inputs.args }}
 
   # Send notification to Discord on failure.
   send_notification:
