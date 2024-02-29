@@ -56,6 +56,7 @@ jobs:
           swift-versions: ${{ inputs.swift-versions }}
           subcommand: ${{ inputs.subcommand }}
           debug: true
+          code-coverage: ${{ inputs.code-coverage }}
     outputs:
       test-matrix: ${{ steps.create_swift_test_matrix.outputs.test-matrix }}
 
@@ -81,11 +82,11 @@ jobs:
           build-method: ${{ matrix.inputs.build-method }}
           subcommand: ${{ matrix.inputs.subcommand }}
           swift-version: ${{ matrix.inputs.swift-version }}
-          code-coverage: ${{ inputs.code-coverage }}
+          code-coverage: ${{ matrix.inputs.code-coverage }}
           args: ${{ inputs.args }}
       - name: Upload to Codecov
         uses: codecov/codecov-action@v4
-        if: ${{ inputs.code-coverage }}
+        if: ${{ matrix.inputs.code-coverage }}
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           fail_ci_if_error: true

@@ -61,6 +61,9 @@ test_matrix="["
 
 # Loop over every platform and swift version.
 for platform in "${platforms_array[@]}"; do
+    # Get our highest Swift version, to be used for code coverage.
+    highest_swift_version=$(printf "%s\n" "${swift_versions_array[@]}" | sort -V | tail -n1)
+
     for swift_version in "${swift_versions_array[@]}"; do
         runner=$(get_runner $platform $swift_version)
 
@@ -81,7 +84,14 @@ for platform in "${platforms_array[@]}"; do
         output+="\"platform\": \"${platform}\", "
         output+="\"build-method\": \"${build_method}\", "
         output+="\"subcommand\": \"${subcommand}\", "
-        output+="\"swift-version\": \"${swift_version}\""
+        output+="\"swift-version\": \"${swift_version}\", "
+
+        if [ $swift_version == $highest_swift_version ]; then
+            output+="\"codecov\": true"
+        else
+            output+="\"codecov\": false"
+        fi
+
         output+=" },"
 
         if [ $debug == 'true' ]; then echo "    $output"; fi
