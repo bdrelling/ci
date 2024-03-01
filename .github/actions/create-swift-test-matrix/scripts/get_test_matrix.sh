@@ -76,7 +76,7 @@ for platform in "${platforms_array[@]}"; do
             # iOS, tvOS, and watchOS still require xcodebuild for building and testing via the command line.
             build_method='xcodebuild'
         elif [ $platform == 'linux' ]; then
-            container="swift:${swift_version}-focal"
+            container="swift:${swift_version}"
         fi
 
         output="{ "
