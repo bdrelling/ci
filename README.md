@@ -8,8 +8,6 @@ I don't recommend you link to or depend upon any scripts or workflows in this re
 
 This "monitor" provides act-a-glance CI statuses across all of my actively maintained repositories.
 
-:warning: Don't look at the source code unless you want to throw up. Also, missing or broken images may just mean the repository is inaccessible to you.
-
 > All GitHub Actions statuses are linked to the `main` branch.
 
 ### Websites
