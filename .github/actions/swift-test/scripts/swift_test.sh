@@ -149,11 +149,8 @@ swift_test() {
             code_coverage_path=$(swift test --show-codecov-path)
         fi
 
-        echo "The Code Coverage Path is: ${code_coverage_path}"
-        echo "The output directory is: ${output}"
-
-        # Copy the code coverage file to the output directory.
-        cp "${code_coverage_path}" "${output}/codecov.json"
+        # Move the code coverage file to the output directory.
+        mv "${code_coverage_path}" "${output}/codecov.json"
     fi
 
     # # Copy code coverage results into the output directory, if applicable.
