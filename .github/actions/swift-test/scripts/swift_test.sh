@@ -66,8 +66,6 @@ platform=$(echo "$platform" | tr '[:upper:]' '[:lower:]')
 method=$(echo "$method" | tr '[:upper:]' '[:lower:]')
 subcommand=$(echo "$subcommand" | tr '[:upper:]' '[:lower:]')
 
-echo "code_coverage =is= ${code_coverage}"
-
 #====================#
 # Define Functions
 #====================#
@@ -109,7 +107,7 @@ swift_test() {
     esac
 
     # If code coverage is enabled, add it to the command.
-    if [ -n "$code_coverage" ]; then
+    if [ "${code_coverage}" == "true" ]; then
         command+=" --enable-code-coverage"
     fi
 
@@ -148,7 +146,7 @@ swift_test() {
     eval "$command"
 
     # Copy code coverage results into the output directory, if applicable.
-    if [[ -n "$code_coverage" && -n "$output" ]]; then
+    if [[ "${code_coverage}" == "true" && -n "$output" ]]; then
         echo "Moving code coverage results into directory '${output}'."
         swift_version=$(current_swift_version)
 
@@ -245,7 +243,7 @@ xcodebuild_test() {
     command+=" -resultBundlePath ${output}/${subcommand}.xcresult"
 
     # If code coverage is enabled, add it to the command.
-    if [ -n "$code_coverage" ]; then
+    if [ "${code_coverage}" == "true" ]; then
         command+=" -enableCodeCoverage YES"
     fi
 
