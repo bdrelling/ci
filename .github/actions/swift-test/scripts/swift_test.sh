@@ -147,7 +147,7 @@ swift_test() {
 
     # Copy code coverage results into the output directory, if applicable.
     if [[ -n "$codecov" && -n "$output" ]]; then
-        echo "Copying code coverage results into directory '${output}'."
+        echo "Moving code coverage results into directory '${output}'."
         swift_version=$(current_swift_version)
 
         # In Swift 5.8 / Xcode 14.3, there is a bug where --enable-code-coverage is required when running --show-codecov-path.
@@ -156,10 +156,10 @@ swift_test() {
         # This bug is fixed in Swift 5.9 / Xcode 15.0.
         if [[ "${swift_version}" != "5.8" ]]; then
             code_coverage_path=$(swift test --show-codecov-path)
-        fi
 
-        # Move the code coverage file to the output directory.
-        mv "${code_coverage_path}" "${output}/codecov.json"
+            # Move the code coverage file to the output directory.
+            mv "${code_coverage_path}" "${output}/codecov.json"
+        fi
     fi
 
     echo "============================================================"
