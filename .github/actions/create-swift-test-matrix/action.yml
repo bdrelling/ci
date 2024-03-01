@@ -21,6 +21,10 @@ inputs:
     description: 'The subcommand to generate the test matrix for. Valid options are: build, test'
     required: false
     default: test
+  code-coverage:
+    description: 'Whether or not code coverage should be generated and uploaded.'
+    required: false
+    default: ''
 outputs:
   test-matrix:
     description: 'A test matrix compatible with the Swift Test workflow.'
