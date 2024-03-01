@@ -139,7 +139,6 @@ swift_test() {
     echo "============================================================"
     echo "Running command:"
     echo "$ $command"
-    echo "This is value of code_coverage: $code_coverage"
     echo "============================================================"
 
     # Run our command.
