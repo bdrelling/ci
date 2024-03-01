@@ -147,10 +147,15 @@ swift_test() {
             echo "------"
             echo "OUTPUT:"
             echo "------"
+            echo "$ swift test --enable-code-coverage --show-codecov-path"
             swift test --enable-code-coverage --show-codecov-path
             echo "------"
 
             code_coverage_path=$(swift test --enable-code-coverage --show-codecov-path)
+
+            echo "------"
+            echo "Code Coverage Path: \"${code_coverage_path}\""
+            echo "------"
         else
             code_coverage_path=$(swift test --show-codecov-path)
         fi
