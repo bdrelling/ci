@@ -66,6 +66,8 @@ platform=$(echo "$platform" | tr '[:upper:]' '[:lower:]')
 method=$(echo "$method" | tr '[:upper:]' '[:lower:]')
 subcommand=$(echo "$subcommand" | tr '[:upper:]' '[:lower:]')
 
+echo "code_coverage =is= ${code_coverage}"
+
 #====================#
 # Define Functions
 #====================#
@@ -107,7 +109,7 @@ swift_test() {
     esac
 
     # If code coverage is enabled, add it to the command.
-    if [ -n "$codecov" ]; then
+    if [ -n "$code_coverage" ]; then
         command+=" --enable-code-coverage"
     fi
 
@@ -139,18 +141,18 @@ swift_test() {
     echo "============================================================"
     echo "Running command:"
     echo "$ $command"
-    echo "This is value of codecov: $codecov"
+    echo "This is value of code_coverage: $code_coverage"
     echo "============================================================"
 
     # Run our command.
     eval "$command"
 
     # Copy code coverage results into the output directory, if applicable.
-    if [[ -n "$codecov" && -n "$output" ]]; then
+    if [[ -n "$code_coverage" && -n "$output" ]]; then
         echo "Moving code coverage results into directory '${output}'."
         swift_version=$(current_swift_version)
 
-        # In Swift 5.8 / Xcode 14.3, there is a bug where --enable-code-coverage is required when running --show-codecov-path.
+        # In Swift 5.8 / Xcode 14.3, there is a bug where --enable-code-coverage is required when running --show-code_coverage-path.
         # Then, when you do use --enable-code-coverage and --show-codeov-path, the entire test suite runs again.
         # Therefore, we're disabling coverage reports for Swift 5.8.
         # This bug is fixed in Swift 5.9 / Xcode 15.0.
@@ -243,7 +245,7 @@ xcodebuild_test() {
     command+=" -resultBundlePath ${output}/${subcommand}.xcresult"
 
     # If code coverage is enabled, add it to the command.
-    if [ -n "$codecov" ]; then
+    if [ -n "$code_coverage" ]; then
         command+=" -enableCodeCoverage YES"
     fi
 
@@ -258,7 +260,7 @@ xcodebuild_test() {
 
     # TODO: Implement code coverage for xcodebuild
     # Copy code coverage results into the output directory, if applicable.
-    # if [[ -n "$codecov" && -n "$output" ]]; then
+    # if [[ -n "$code_coverage" && -n "$output" ]]; then
     #     echo "Copying code coverage results into directory '${output}'."
     #     cp $(swift test --show-codecov-path) "${output}/codecov.json"
     # fi
