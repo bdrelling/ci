@@ -145,7 +145,7 @@ swift_test() {
             code_coverage_path=$(swift test --show-codecov-path)
         fi
 
-        cp "$(code_coverage_path)" "${output}/codecov.json"
+        cp "${code_coverage_path}" "${output}/codecov.json"
     fi
 
     echo "============================================================"
