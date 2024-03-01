@@ -15,15 +15,15 @@ arch=$(uname -m)
 # Define our default subcommand, which is "test".
 subcommand='test'
 
-# Define the current xcode version.
-# This code extracts the major version of Xcode only. (eg. "14", not "14.0")
-xcode_version=$(xcodebuild -version | head -n 1 | sed -r 's/Xcode ([0-9]+)[.0-9]*/\1/')
-
 # Our default platform is Linux on Linux operating systems or macOS on Darwin (Apple) operating systems.
 if [ $operating_system == 'Linux' ]; then
     platform='linux'
 else
     platform='macos'
+
+    # Define the current xcode version.
+    # This code extracts the major version of Xcode only. (eg. "14", not "14.0")
+    xcode_version=$(xcodebuild -version | head -n 1 | sed -r 's/Xcode ([0-9]+)[.0-9]*/\1/')
 fi
 
 # Our default build method is "swift" for Linux or "xcodebuild" for Apple platforms.
@@ -136,6 +136,10 @@ swift_test() {
     if [[ -n "$codecov" && -n "$output" ]]; then
         echo "Copying code coverage results into directory '${output}'."
         swift_version=$(current_swift_version)
+
+        echo "-----"
+        echo "The swift version is ${swift_version}"
+        echo "-----"
 
         # In Swift 5.8 / Xcode 14.3, there is a bug where --enable-code-coverage is required when running --show-codecov-path.
         # This bug is fixed in Swift 5.9 / Xcode 15.0.
