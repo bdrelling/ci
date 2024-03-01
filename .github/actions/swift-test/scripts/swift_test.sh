@@ -71,7 +71,7 @@ subcommand=$(echo "$subcommand" | tr '[:upper:]' '[:lower:]')
 #====================#
 
 current_swift_version() {
-    swift --version 2>&1 | sed -nE 's/.*Apple Swift version ([0-9]+\.[0-9]+).*/\1/p'
+    swift --version | sed -nE 's/.*Swift version ([0-9]+\.[0-9]+).*/\1/p'
 }
 
 swift_test() {
@@ -149,7 +149,8 @@ swift_test() {
             code_coverage_path=$(swift test --show-codecov-path)
         fi
 
-        cp "${code_coverage_path}" "${output}/codecov.json"
+        # Copy the code coverage file to the output directory.
+        rsync -av "${code_coverage_path}" "${output}/codecov.json"
     fi
 
     # # Copy code coverage results into the output directory, if applicable.
