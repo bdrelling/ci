@@ -139,6 +139,7 @@ swift_test() {
     echo "============================================================"
     echo "Running command:"
     echo "$ $command"
+    echo "This is value of codecov: $codecov"
     echo "============================================================"
 
     # Run our command.
