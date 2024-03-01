@@ -138,15 +138,30 @@ swift_test() {
         swift_version=$(current_swift_version)
 
         # In Swift 5.8 / Xcode 14.3, there is a bug where --enable-code-coverage is required when running --show-codecov-path.
-        # However, the same version also causes inconsistent problems on Linux no matter how you send the args.
-        # Therefore, we're disabling coverage reports for Swift 5.8.
         # This bug is fixed in Swift 5.9 / Xcode 15.0.
-        if [[ $swift_version != 5.8 ]]; then
+        if [[ "${swift_version}" != "5.8" ]]; then
+            code_coverage_path=$(swift test --enable-code-coverage --show-codecov-path)
+        else
             code_coverage_path=$(swift test --show-codecov-path)
-            cp "${code_coverage_path}" "${output}/codecov.json"
         fi
 
+        cp "${code_coverage_path}" "${output}/codecov.json"
     fi
+
+    # # Copy code coverage results into the output directory, if applicable.
+    # if [[ -n "$codecov" && -n "$output" ]]; then
+    #     echo "Copying code coverage results into directory '${output}'."
+    #     swift_version=$(current_swift_version)
+
+    #     # In Swift 5.8 / Xcode 14.3, there is a bug where --enable-code-coverage is required when running --show-codecov-path.
+    #     # However, the same version also causes inconsistent problems on Linux no matter how you send the args.
+    #     # Therefore, we're disabling coverage reports for Swift 5.8.
+    #     # This bug is fixed in Swift 5.9 / Xcode 15.0.
+    #     if [[ "${swift_version}" != "5.8" ]]; then
+    #         code_coverage_path=$(swift test --show-codecov-path)
+    #         cp "${code_coverage_path}" "${output}/codecov.json"
+    #     fi
+    # fi
 
     echo "============================================================"
 }
