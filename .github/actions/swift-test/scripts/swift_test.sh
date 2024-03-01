@@ -150,7 +150,8 @@ swift_test() {
         fi
 
         # Copy the code coverage file to the output directory.
-        rsync -av "${code_coverage_path}" "${output}/codecov.json"
+        tar cf - -C "${code_coverage_path}" . | tar xf - -C "${output}/codecov.json"
+        # rsync -av "${code_coverage_path}" "${output}/codecov.json"
     fi
 
     # # Copy code coverage results into the output directory, if applicable.
