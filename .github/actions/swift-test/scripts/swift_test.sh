@@ -139,7 +139,7 @@ swift_test() {
 
         # In Swift 5.8 / Xcode 14.3, there is a bug where --enable-code-coverage is required when running --show-codecov-path.
         # This bug is fixed in Swift 5.9 / Xcode 15.0.
-        if [[ "${swift_version}" != "5.8" ]]; then
+        if [[ "${swift_version}" == "5.8" ]]; then
             code_coverage_path=$(swift test --enable-code-coverage --show-codecov-path)
         else
             code_coverage_path=$(swift test --show-codecov-path)
