@@ -20,7 +20,7 @@ concurrency:
 
 jobs:
   # Build the image and push to the container registry.
-  deploy:
+  deploy_container:
     name: Deploy
     runs-on: ubuntu-latest
     steps:
@@ -52,6 +52,6 @@ jobs:
   send_notification:
     name: Send Notification
     uses: ./.github/workflows/send_notification.yml
-    needs: [deploy]
+    needs: [deploy_app]
     if: failure()
     secrets: inherit
