@@ -1,4 +1,4 @@
-name: Deploy to GitHub
+name: Deploy to GitHub and DigitalOcean
 
 on:
   workflow_call:
