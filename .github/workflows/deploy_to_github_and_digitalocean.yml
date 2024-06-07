@@ -45,7 +45,7 @@ jobs:
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
       - name: Create Deployment
         run: |
-          doctl registry login --expiry-seconds 60
+          doctl auth init
           doctl apps create-deployment ${{ secrets.DIGITALOCEAN_APP_ID }}
 
   # Send notification to Discord on failure.
